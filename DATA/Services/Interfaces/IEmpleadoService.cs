@@ -8,6 +8,7 @@ namespace TPLogicaWebApi.DATA.Services.Interfaces
         Task<List<Empleado>> TraerTodo();
         Task<List<Empleado>> TraerEstado();
         Task<Empleado?> TraerId(int id);
+        Task<Empleado?> TraerNombre(string nombre);
         Task<Empleado?> TraerDni(int dni);
         Task<bool> Crear(EmpleadoInsertDto empleado);
         Task<bool> Modificar(int id, EmpleadoUpdateDto empleado);

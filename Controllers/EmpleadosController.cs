@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TPLogicaWebApi.DATA.DTOs.EmpleadosDTOs;
+using TPLogicaWebApi.DATA.Services.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,93 @@ namespace TPLogicaWebApi.Controllers
     [ApiController]
     public class EmpleadosController : ControllerBase
     {
-        // GET: api/<EmpleadosController>
+        private IEmpleadoService _service;
+        public EmpleadosController(IEmpleadoService service)
+        {
+            _service = service;
+        }
+        
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return Ok( await _service.TraerTodo());
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-
-        // GET api/<EmpleadosController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("Estado")]
+        public async Task<IActionResult> GetEstado()
         {
-            return "value";
+            try
+            {
+                return Ok(await _service.TraerEstado());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-
+        
+        [HttpGet("{dni:int}")]
+        public async Task<IActionResult> GetByDni(int dni)
+        {
+            try
+            {
+                if(dni<=0)
+                    return BadRequest("El DNI debe ser un numero positivo mayor a cero.");
+                return Ok(await _service.TraerEstado());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet("{nombre}")]
+        public async Task<IActionResult> GetNombre(string nombre)
+        {
+            try
+            {
+                if(string.IsNullOrWhiteSpace(nombre))
+                    return BadRequest("El nombre no puede estar vacio.");
+                return Ok(await _service.TraerNombre(nombre));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         // POST api/<EmpleadosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostEmpleado([FromBody] EmpleadoInsertDto empleado)
         {
+            try
+            {
+                return Ok(await _service.Crear(empleado));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // PUT api/<EmpleadosController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutEmpleadp(int id, [FromBody] EmpleadoUpdateDto empleado)
         {
+            try
+            {
+                return Ok(await _service.Modificar(id,empleado));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // DELETE api/<EmpleadosController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+      
     }
 }

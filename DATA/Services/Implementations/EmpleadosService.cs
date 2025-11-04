@@ -63,6 +63,11 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
             return entity;
         }
 
+        public async Task<Empleado?> TraerNombre(string nombre)
+        {
+            return await _repo.GetByNombre(nombre);
+        }
+
         public async Task<List<Empleado>> TraerTodo()
         {
             return await _repo.GetAll();

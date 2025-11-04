@@ -26,6 +26,11 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
             return await _context.Empleados.AsNoTracking().FirstOrDefaultAsync(x=>x.IdEmpleado==id);
         }
 
+        public async Task<Empleado?> GetByNombre(string nombre)
+        {
+            return await _context.Empleados.AsNoTracking().FirstOrDefaultAsync(x => x.NomEmp == nombre);
+        }
+
         public async Task<List<Empleado>> GetEstado()
         {
             return await _context.Empleados.Where(x=>x.Estado==true).ToListAsync();
