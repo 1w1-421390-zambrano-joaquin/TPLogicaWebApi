@@ -9,5 +9,6 @@ namespace TPLogicaWebApi.DATA.Repositories.Interfaces
         Task<bool> Insert(Producto producto);
         Task<bool> Update(Producto producto);
         Task<List<Producto>> GetByName(string nombre);
+        Task<Producto?> GetById2(int id);
     }
 }

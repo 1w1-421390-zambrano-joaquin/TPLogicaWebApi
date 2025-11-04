@@ -21,6 +21,11 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
             return await _context.Productos.AsNoTracking().FirstOrDefaultAsync(x=>x.IdProducto==id);
         }
 
+        public async Task<Producto?> GetById2(int id)
+        {
+            return await _context.Productos.FindAsync(id);
+        }
+
         public async Task<List<Producto>> GetByName(string nombre)
         {
             return await _context.Productos.AsNoTracking().Where(x=>x.NombreComercial==nombre).ToListAsync();
