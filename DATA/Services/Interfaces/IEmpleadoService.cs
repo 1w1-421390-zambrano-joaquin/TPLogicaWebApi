@@ -1,4 +1,5 @@
-﻿using TPLogicaWebApi.DATA.Models;
+﻿using TPLogicaWebApi.DATA.DTOs.EmpleadosDTOs;
+using TPLogicaWebApi.DATA.Models;
 
 namespace TPLogicaWebApi.DATA.Services.Interfaces
 {
@@ -8,7 +9,7 @@ namespace TPLogicaWebApi.DATA.Services.Interfaces
         Task<List<Empleado>> TraerEstado();
         Task<Empleado?> TraerId(int id);
         Task<Empleado?> TraerDni(int dni);
-        Task<bool> Crear(Empleado empleado);
-        Task<bool> Modificar(Empleado empleado);
+        Task<bool> Crear(EmpleadoInsertDto empleado);
+        Task<bool> Modificar(int id, EmpleadoUpdateDto empleado);
     }
 }
