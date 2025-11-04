@@ -9,6 +9,6 @@ namespace TPLogicaWebApi.DATA.Repositories.Interfaces
         Task<List<Cliente>> GetByName(string nombre);
         Task<bool> Insert(Cliente cliente);
         Task<bool> Update(Cliente cliente);
-
+        Task<Cliente?> GetByDni(int dni);
     }
 }
