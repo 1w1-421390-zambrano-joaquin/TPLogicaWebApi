@@ -30,16 +30,16 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
         public async Task<bool> Modificar(int id,ClienteUpdateDto cliente)
         {
             var entity = await TraerId(id);
-            entity = new Cliente
-            {
-                IdCliente = id,
-                Dni = cliente.Dni,
-                NomCliente = cliente.NomCliente,
-                ApeCliente = cliente.ApeCliente,
-                Teléfono = cliente.Telefono,
-                Domicilio=cliente.Domicilio,
-                Estado = cliente.Estado
-            };
+
+
+            entity.IdCliente = id;
+            entity.Dni = cliente.Dni;
+            entity.NomCliente = cliente.NomCliente;
+            entity.ApeCliente = cliente.ApeCliente;
+            entity.Teléfono = cliente.Telefono;
+            entity.Domicilio = cliente.Domicilio;
+            entity.Estado = cliente.Estado;
+            
             return await _repo.Update(entity);
         }
 

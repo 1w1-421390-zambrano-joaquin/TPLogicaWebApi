@@ -12,7 +12,7 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
         {
             _repo = repo;
         }
-        public Task<bool> Crear(EmpleadoInsertDto empleado)
+        public async Task<bool> Crear(EmpleadoInsertDto empleado)
         {
             var entity = new Empleado
             {
@@ -23,22 +23,18 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 Teléfono=empleado.Telefono,
                 Estado=true
             };
-            return _repo.Insert(entity);
+            return await _repo.Insert(entity);
         }
 
         public async Task<bool> Modificar(int id,EmpleadoUpdateDto empleado)
         {
             var entity = await TraerId(id);
-            entity = new Empleado
-            {
-                IdEmpleado = id,
-                NomEmp = empleado.NomEmp,
-                ApeEmp=empleado.ApeEmp,
-                Domicilio=empleado.Domicilio,
-                Dni=empleado.Dni,
-                Teléfono=empleado.Telefono,
-                Estado=empleado.Estado
-            };
+            entity.NomEmp = empleado.NomEmp;
+            entity.ApeEmp = empleado.ApeEmp;
+            entity.Domicilio = empleado .Domicilio;
+            entity.Dni = empleado.Dni;
+            entity.Teléfono = empleado.Telefono;
+            entity.Estado = empleado.Estado;
             return await _repo.Update(entity);
         }
 

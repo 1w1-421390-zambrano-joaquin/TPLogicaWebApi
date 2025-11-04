@@ -42,21 +42,21 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         
-        [HttpGet("{dni:int}")]
+        [HttpGet("DNI/{dni:int}")]
         public async Task<IActionResult> GetByDni(int dni)
         {
             try
             {
                 if(dni<=0)
                     return BadRequest("El DNI debe ser un numero positivo mayor a cero.");
-                return Ok(await _service.TraerEstado());
+                return Ok(await _service.TraerDni(dni));
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("{nombre}")]
+        [HttpGet("Nombre/{nombre}")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try

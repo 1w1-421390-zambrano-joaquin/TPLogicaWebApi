@@ -23,6 +23,8 @@ builder.Services.AddDbContext<FarmaciaTPLogica1Context>(options => options.UseSq
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
+builder.Services.AddScoped<IEmpleadoRepository, EmpleadosRepository>();
+builder.Services.AddScoped<IEmpleadoService, EmpleadosService>();
 // ¡¡AQUÍ ESTÁ LA SOLUCIÓN!!
 // Agrega estas dos líneas para el nuevo recurso de Clientes:
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
