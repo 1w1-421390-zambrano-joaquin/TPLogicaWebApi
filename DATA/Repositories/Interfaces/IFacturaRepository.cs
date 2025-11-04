@@ -1,6 +1,9 @@
-﻿namespace TPLogicaWebApi.DATA.Repositories.Interfaces
+﻿using TPLogicaWebApi.DATA.Models;
+
+namespace TPLogicaWebApi.DATA.Repositories.Interfaces
 {
-    public class IFacturaRepository
+    public interface IFacturaRepository
     {
+        
     }
 }
