@@ -25,6 +25,11 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 Stock = producto.Stock,
                 Proveedor = producto.Proveedor
             };
+            DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
+            if (entity.FVencimiento < hoy)
+            {
+                throw new InvalidOperationException("No se puede cargar un producto vencido.");
+            }
             return await _repo.Insert(entity);
         }
 
@@ -43,6 +48,11 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 Stock = producto.Stock,
                 Proveedor = producto.Proveedor
             };
+            DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
+            if (entity.FVencimiento < hoy)
+            {
+                throw new InvalidOperationException("No se puede modificar un producto vencido.");
+            }
             return await  _repo.Update(entity);
         }
 

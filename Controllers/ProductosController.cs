@@ -93,7 +93,7 @@ namespace TPLogicaWebApi.Controllers
             }
             catch (KeyNotFoundException ex)
             {
-                return NotFound(ex.Message); // Devuelve 404
+                return NotFound(ex.Message); 
             }
             catch (Exception ex)
             {
