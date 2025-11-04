@@ -1,6 +1,10 @@
-﻿namespace TPLogicaWebApi.DATA.Services.Interfaces
+﻿using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
+
+namespace TPLogicaWebApi.DATA.Services.Interfaces
 {
-    public class IFacturaService
-    {
+    public interface IFacturaService
+    { 
+        Task<FacturaGetDto> TraerFactura(int nroFactura);
+        Task<bool> CrearFactura(FacturaInsertDto factura);
     }
 }
