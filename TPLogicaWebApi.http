@@ -1,0 +1,6 @@
+@TPLogicaWebApi_HostAddress = http://localhost:5048
+
+GET {{TPLogicaWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
