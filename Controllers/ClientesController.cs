@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TPLogicaWebApi.DATA.DTOs.ClientesDTOs;
+using TPLogicaWebApi.DATA.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,84 @@ namespace TPLogicaWebApi.Controllers
     [ApiController]
     public class ClientesController : ControllerBase
     {
-        // GET: api/<ClientesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IClienteService _service;
+        public ClientesController(IClienteService service)
         {
-            return new string[] { "value1", "value2" };
+            _service = service;
+        }
+       
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _service.TraerTodo());
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("Estado")]
+        public async Task<IActionResult> GetActivo()
+        {
+            try
+            {
+                return Ok(await _service.TraerActivo());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // GET api/<ClientesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{dni:int}")]
+        public async Task<IActionResult> GetDNI(int dni)
         {
-            return "value";
+            try
+            {
+                if (dni <= 0)
+                {
+                    return BadRequest("El DNI debe ser un numero positivo mayor a cero.");
+                }
+                return Ok(await _service.TraerDni(dni));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // POST api/<ClientesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostCliente([FromBody] ClienteInsertDto cliente)
         {
+            try
+            {
+                return Ok(await _service.Cargar(cliente));
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> PutCliente(int id,[FromBody] ClienteUpdateDto cliente)
+        {
+            try
+            {
+                return Ok(await _service.Modificar(id,cliente));
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // PUT api/<ClientesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<ClientesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

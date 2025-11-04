@@ -19,7 +19,7 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
 
         public async Task<Cliente?> GetByDni(int dni)
         {
-            return await _context.Clientes.Where(x=>x.Dni==dni).FirstOrDefaultAsync();
+            return await _context.Clientes.AsNoTracking().Where(x=>x.Dni==dni).FirstOrDefaultAsync();
         }
 
         public async Task<Cliente?> GetById(int id)
