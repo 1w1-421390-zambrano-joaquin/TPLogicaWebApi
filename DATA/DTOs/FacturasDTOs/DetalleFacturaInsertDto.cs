@@ -8,9 +8,7 @@ namespace TPLogicaWebApi.DATA.DTOs.FacturasDTOs
         [Range(1, int.MaxValue)]
         public int IdProducto { get; set; }
 
-        [Required]
-        [Range(0.01, double.MaxValue)]
-        public decimal PrecioUnitario { get; set; } 
+        
 
         [Required]
         [Range(1, int.MaxValue)]
