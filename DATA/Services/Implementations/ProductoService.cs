@@ -47,7 +47,8 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 NroLote = producto.NroLote,
                 FVencimiento = producto.FVencimiento,
                 Stock = producto.Stock,
-                Proveedor = producto.Proveedor
+                Proveedor = producto.Proveedor,
+                PrecioUnitario= producto.Precio
             };
             DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
             if (entity.FVencimiento < hoy)

@@ -55,19 +55,19 @@ namespace TPLogicaWebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
         {
-            // (La validación de DTOs [Required] es automática gracias a [ApiController])
+            
             try
             {
-                // 3. Llama al servicio (que recibe el DTO de creación)
+                
                return Ok( await _service.CrearFactura(dto)); 
             }
-            catch (KeyNotFoundException ex) // Ej. Cliente o Producto no existe
+            catch (KeyNotFoundException ex) 
             {
-                return BadRequest(ex.Message); // 400
+                return BadRequest(ex.Message); 
             }
-            catch (InvalidOperationException ex) // Ej. Sin stock
+            catch (InvalidOperationException ex) 
             {
-                return BadRequest(ex.Message); // 400
+                return BadRequest(ex.Message); 
             }
             catch (Exception ex)
             {

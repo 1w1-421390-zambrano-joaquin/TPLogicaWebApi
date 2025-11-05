@@ -27,5 +27,8 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
 
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres.")]
         public string? Proveedor { get; set; }
+
+        [Range(0, 500, ErrorMessage = "El precio no puede ser negativo.")]
+        public int Precio { get; set; }
     }
 }

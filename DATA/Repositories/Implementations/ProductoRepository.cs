@@ -11,6 +11,13 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
         {
             _context = context;
         }
+
+        public async Task<bool> Delete(Producto producto)
+        {
+            _context.Productos.ExecuteDelete(producto);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
         public async Task<List<Producto>> GetAll()
         {
             return await _context.Productos.AsNoTracking().ToListAsync();
