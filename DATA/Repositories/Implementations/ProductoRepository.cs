@@ -31,7 +31,7 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
 
         public async Task<List<Producto>> GetByName(string nombre)
         {
-            return await _context.Productos.AsNoTracking().Where(x=>x.NombreComercial.Contains(nombre) || x.PrincipioActivo.Contains(nombre)).ToListAsync();
+            return await _context.Productos.AsNoTracking().Where((x => (x.NombreComercial.Contains(nombre) || x.PrincipioActivo.Contains(nombre)) && x.Stock > 0)).ToListAsync();
         }
 
         public async Task<bool> Insert(Producto producto)
