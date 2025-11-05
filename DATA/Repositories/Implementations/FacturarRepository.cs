@@ -43,7 +43,9 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
                             Producto = new ProductoGetDto
                             {
                                 IdProducto = d.IdProductoNavigation.IdProducto,
-                                NombreComercial = d.IdProductoNavigation.NombreComercial
+                                NombreComercial = d.IdProductoNavigation.NombreComercial,
+                                Precio= d.IdProductoNavigation.PrecioUnitario
+
                             }
                         })
                         .ToList()

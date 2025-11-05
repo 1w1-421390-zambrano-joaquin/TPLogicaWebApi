@@ -34,5 +34,9 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
         [Required(ErrorMessage = "El proveedor es obligatorio.")]
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres.")]
         public string? Proveedor { get; set; }
+
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor a 0.")]
+        public decimal Precio { get; set; }
     }
 }

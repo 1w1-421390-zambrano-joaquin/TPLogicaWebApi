@@ -65,11 +65,12 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                         throw new InvalidOperationException($"Stock insuficiente para {producto.NombreComercial}.");
 
                     producto.Stock -= detalleDto.Cantidad;
+                    var precioDeLaDB = producto.PrecioUnitario;
 
                     var nuevoDetalle = new DetalleFactura
                     {
                         IdProducto = detalleDto.IdProducto,
-                        PrecioUnitario = detalleDto.PrecioUnitario,
+                        PrecioUnitario = precioDeLaDB,
                         Cantidad = detalleDto.Cantidad,
                         Observ = detalleDto.Observ
                     };
