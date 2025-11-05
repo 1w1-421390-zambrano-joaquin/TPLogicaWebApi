@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TPLogicaWebApi.DATA.Models;
 
@@ -20,4 +21,7 @@ public partial class DetalleFactura
     public string Observ { get; set; }
 
     public virtual Factura NroFacturaNavigation { get; set; }
+
+    [ForeignKey("IdProducto")]
+    public virtual Producto IdProductoNavigation { get; set; }
 }

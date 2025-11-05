@@ -19,14 +19,14 @@ builder.Services.AddDbContext<FarmaciaTPLogica1Context>(options => options.UseSq
 
 
 
-// Registro de Productos (ya lo tenías)
+
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
-
+builder.Services.AddScoped<IFacturaRepository, FacturarRepository>();
+builder.Services.AddScoped<IFacturaService, FacturaService>();
 builder.Services.AddScoped<IEmpleadoRepository, EmpleadosRepository>();
 builder.Services.AddScoped<IEmpleadoService, EmpleadosService>();
-// ¡¡AQUÍ ESTÁ LA SOLUCIÓN!!
-// Agrega estas dos líneas para el nuevo recurso de Clientes:
+
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
@@ -36,7 +36,7 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

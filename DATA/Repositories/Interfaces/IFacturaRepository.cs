@@ -1,10 +1,11 @@
-﻿using TPLogicaWebApi.DATA.Models;
+﻿using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
+using TPLogicaWebApi.DATA.Models;
 
 namespace TPLogicaWebApi.DATA.Repositories.Interfaces
 {
     public interface IFacturaRepository
     {
-        Task<Factura?> GetFactura(int nroFactura);
-        Task<bool> Insert(Factura factura);
+        Task<FacturaGetDto?> GetFactura(int nroFactura);
+        Task Insert(Factura factura);
     }
 }

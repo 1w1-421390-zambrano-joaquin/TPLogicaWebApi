@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
 using TPLogicaWebApi.DATA.Models;
 using TPLogicaWebApi.DATA.Repositories.Interfaces;
 
@@ -12,19 +13,50 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
             _context = context;
         }
 
-        public async Task<Factura?> GetFactura(int nroFactura)
+        public async Task<FacturaGetDto?> GetFactura(int nroFactura)
         {
-            return await _context.Facturas.Include(f=>f.IdClienteNavigation).
-                                Include(f => f.IdEmpleadoNavigation).
-                                Include(f => f.DetalleFacturas).
-                                ThenInclude(d => d.IdProducto).
-                                AsNoTracking().FirstOrDefaultAsync(f => f.NroFactura == nroFactura);
+            return await _context.Facturas.AsNoTracking()
+            .Where(f => f.NroFactura == nroFactura) 
+            .Select(f => new FacturaGetDto 
+            {
+                NroFactura = f.NroFactura,
+                TipoFactura = f.TipoFactura,
+                FechaFactura = f.FechaFactura,
+
+
+                Cliente = new ClienteGetDto
+                {
+                    IdCliente = f.IdClienteNavigation.IdCliente,
+                    NombreCompleto = f.IdClienteNavigation.NomCliente + " " + f.IdClienteNavigation.ApeCliente
+                },
+                Empleado = new EmpleadoGetDto
+                {
+                    IdEmpleado = f.IdEmpleadoNavigation.IdEmpleado,
+                    NombreCompleto = f.IdEmpleadoNavigation.NomEmp + " " + f.IdEmpleadoNavigation.ApeEmp
+                },
+
+
+                Detalles = f.DetalleFacturas.Select(d => new DetalleFacturaGetDto
+                {
+                    PrecioUnitario = d.PrecioUnitario,
+                    Cantidad = d.Cantidad,
+                    Producto = _context.Productos
+                                .Where(p => p.IdProducto == d.IdProducto) 
+                                .Select(p => new ProductoGetDto
+                                {
+                                    IdProducto = p.IdProducto,
+                                    NombreComercial = p.NombreComercial
+                                })
+                                .FirstOrDefault()
+                }).ToList()
+            })
+            .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> Insert(Factura factura)
+        public async Task Insert(Factura factura)
         {
-            _context.Facturas.Add(factura);
-            return await _context.SaveChangesAsync() > 0;
+            
+           await _context.Facturas.AddAsync(factura);
         }
     }
 }

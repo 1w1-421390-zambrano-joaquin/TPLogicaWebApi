@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
+using TPLogicaWebApi.DATA.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,54 @@ namespace TPLogicaWebApi.Controllers
     [ApiController]
     public class FacturasController : ControllerBase
     {
-        // GET: api/<FacturasController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IFacturaService _service;
+        public FacturasController(IFacturaService service)
         {
-            return new string[] { "value1", "value2" };
+            _service = service;
+        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetFactura(int id)
+        {
+            try
+            {
+                return Ok(await _service.TraerFactura(id));
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Para cualquier otro error
+                var error = ex.InnerException?.Message ?? ex.Message;
+                return StatusCode(500, error);
+            }
         }
 
-        // GET api/<FacturasController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<FacturasController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
         {
+            // (La validación de DTOs [Required] es automática gracias a [ApiController])
+            try
+            {
+                // 3. Llama al servicio (que recibe el DTO de creación)
+               return Ok( await _service.CrearFactura(dto)); 
+            }
+            catch (KeyNotFoundException ex) // Ej. Cliente o Producto no existe
+            {
+                return BadRequest(ex.Message); // 400
+            }
+            catch (InvalidOperationException ex) // Ej. Sin stock
+            {
+                return BadRequest(ex.Message); // 400
+            }
+            catch (Exception ex)
+            {
+                var error = ex.InnerException?.Message ?? ex.Message;
+                return StatusCode(500, error);
+            }
         }
 
-        // PUT api/<FacturasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<FacturasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
