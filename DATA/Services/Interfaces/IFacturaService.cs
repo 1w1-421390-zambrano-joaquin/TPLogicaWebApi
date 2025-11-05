@@ -6,5 +6,7 @@ namespace TPLogicaWebApi.DATA.Services.Interfaces
     { 
         Task<FacturaGetDto> TraerFactura(int nroFactura);
         Task<bool> CrearFactura(FacturaInsertDto factura);
+        Task<List<FacturaGetDto>> TraerAllFacturas();
+
     }
 }

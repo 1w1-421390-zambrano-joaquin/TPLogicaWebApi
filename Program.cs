@@ -32,11 +32,28 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
 builder.Services.AddControllers();
+//Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Web", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://127.0.0.1:5500",  // Live Server por IP
+                "http://localhost:5500"   // Live Server por hostname
+                                          // agrega aquí otros orígenes de tu web si corresponde (https, dominio real, etc.)
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        // Si usas cookies/autenticación por cookie:
+        // .AllowCredentials();
+    });
+});
 
 
 
 var app = builder.Build();
-
+app.UseCors("Web");
 
 if (app.Environment.IsDevelopment())
 {

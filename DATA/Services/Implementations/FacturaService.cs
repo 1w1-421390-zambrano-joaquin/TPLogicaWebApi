@@ -94,20 +94,25 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
             }
         }
 
-        
+        public async Task<List<FacturaGetDto>> TraerAllFacturas()
+        {
+            return await _facturaRepo.GetAllFacturas();
+        }
+
         public async Task<FacturaGetDto> TraerFactura(int nroFactura)
         {
-            
+
             var facturaDto = await _facturaRepo.GetFactura(nroFactura);
 
-            
+
             if (facturaDto == null)
             {
                 throw new KeyNotFoundException($"Factura {nroFactura} no encontrada.");
             }
 
-            
+
             return facturaDto;
         }
+
     }
 }
