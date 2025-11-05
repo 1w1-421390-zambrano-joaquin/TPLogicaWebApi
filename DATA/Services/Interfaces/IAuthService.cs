@@ -1,6 +1,11 @@
-﻿namespace TPLogicaWebApi.DATA.Services.Interfaces
+﻿using TPLogicaWebApi.DATA.DTOs.UsuariosDTOs;
+using TPLogicaWebApi.DATA.Models;
+
+namespace TPLogicaWebApi.DATA.Services.Interfaces
 {
-    public class IAuthService
+    public interface IAuthService 
     {
+        Task<Usuario?> Logear(LoginRequestDto dto);
+        Task<Usuario> Crear(RegisterRequestDto dto);
     }
 }

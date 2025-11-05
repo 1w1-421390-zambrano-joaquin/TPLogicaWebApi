@@ -4,10 +4,10 @@ namespace TPLogicaWebApi.DATA.Repositories.Interfaces
 {
     public interface IUsuarioRepository
     {
-        // Busca un usuario por su email e incluye sus roles.
-        Task<Usuario?> GetByEmailWithRolesAsync(string email);
+
+        Task<Usuario?> GetByEmailRoles(string email);
 
         // Un validador rápido para el REGISTRO
-        Task<bool> EmailExistsAsync(string email);
+        Task<bool> EmailExists(string email);
     }
 }

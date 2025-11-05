@@ -26,7 +26,8 @@ builder.Services.AddScoped<IFacturaRepository, FacturarRepository>();
 builder.Services.AddScoped<IFacturaService, FacturaService>();
 builder.Services.AddScoped<IEmpleadoRepository, EmpleadosRepository>();
 builder.Services.AddScoped<IEmpleadoService, EmpleadosService>();
-
+builder.Services.AddScoped<IUsuarioRepository, UsuarioReposiory>();
+builder.Services.AddScoped<IAuthService, UsuariosService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
