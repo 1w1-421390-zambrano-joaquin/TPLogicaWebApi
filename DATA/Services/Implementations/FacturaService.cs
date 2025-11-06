@@ -115,5 +115,9 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
             return facturaDto;
         }
 
+        public async Task<Factura> TraerUltimaFactura()
+        {
+            return await _facturaRepo.GetUltimaFactura();
+        }
     }
 }

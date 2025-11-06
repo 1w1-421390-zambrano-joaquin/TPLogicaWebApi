@@ -52,6 +52,10 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
                 })
                 .ToListAsync();
         }
+        public async Task<Factura> GetUltimaFactura()
+        {
+            return await _context.Facturas.OrderByDescending(x => x.NroFactura).FirstOrDefaultAsync();
+        }
         public async Task<FacturaGetDto?> GetFactura(int nroFactura)
         {
             return await _context.Facturas.AsNoTracking()

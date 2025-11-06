@@ -51,6 +51,24 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, error);
             }
         }
+        [HttpGet("ultima")]
+        public async Task<IActionResult> GetUltimaFactura()
+        {
+            try
+            {
+                return Ok(await _service.TraerUltimaFactura());
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Para cualquier otro error
+                var error = ex.InnerException?.Message ?? ex.Message;
+                return StatusCode(500, error);
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)

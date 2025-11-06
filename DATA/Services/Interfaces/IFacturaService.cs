@@ -1,4 +1,5 @@
 ﻿using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
+using TPLogicaWebApi.DATA.Models;
 
 namespace TPLogicaWebApi.DATA.Services.Interfaces
 {
@@ -7,6 +8,7 @@ namespace TPLogicaWebApi.DATA.Services.Interfaces
         Task<FacturaGetDto> TraerFactura(int nroFactura);
         Task<bool> CrearFactura(FacturaInsertDto factura);
         Task<List<FacturaGetDto>> TraerAllFacturas();
+        Task<Factura> TraerUltimaFactura();
 
     }
 }
