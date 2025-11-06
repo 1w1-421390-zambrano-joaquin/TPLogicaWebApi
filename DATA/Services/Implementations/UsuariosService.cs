@@ -3,6 +3,7 @@ using TPLogicaWebApi.DATA.DTOs.UsuariosDTOs;
 using TPLogicaWebApi.DATA.Models;
 using TPLogicaWebApi.DATA.Repositories.Interfaces;
 using TPLogicaWebApi.DATA.Services.Interfaces;
+using BCrypt.Net;
 
 namespace TPLogicaWebApi.DATA.Services.Implementations
 {
@@ -33,7 +34,7 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 {
                     IdCredencial = Guid.NewGuid(),
                     Email = dto.Email,
-                    Password = dto.Password 
+                    Password = dto.Password
                 };
                 var nuevoUsuario = new Usuario
                 {

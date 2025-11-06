@@ -29,7 +29,7 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
 
         public async Task<List<Cliente>> GetByName(string nombre)
         {
-            return await _context.Clientes.Where(x => x.NomCliente == nombre).ToListAsync();
+            return await _context.Clientes.Where(x => x.NomCliente.Contains(nombre)).ToListAsync();
         }
 
         public async Task<bool> Insert(Cliente cliente)
