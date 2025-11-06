@@ -28,7 +28,7 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("/buscar/{nombre}")]
+        [HttpGet("buscar/{nombre}")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try

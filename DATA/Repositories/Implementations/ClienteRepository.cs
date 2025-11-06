@@ -14,22 +14,22 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
         }
         public async Task<List<Cliente>> GetAll()
         {
-            return await _context.Clientes.AsNoTracking().ToListAsync();
+            return await _context.Clientes.AsNoTracking().Where(x => x.Estado == true).ToListAsync();
         }
 
         public async Task<Cliente?> GetByDni(int dni)
         {
-            return await _context.Clientes.AsNoTracking().Where(x=>x.Dni==dni).FirstOrDefaultAsync();
+            return await _context.Clientes.AsNoTracking().Where(x=>x.Dni==dni && x.Estado == true).FirstOrDefaultAsync();
         }
 
         public async Task<Cliente?> GetById(int id)
         {
-            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(x=>x.IdCliente==id);
+            return await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(x=>x.IdCliente==id && x.Estado == true);
         }
 
         public async Task<List<Cliente>> GetByName(string nombre)
         {
-            return await _context.Clientes.Where(x => x.NomCliente.Contains(nombre)).ToListAsync();
+            return await _context.Clientes.Where(x => x.NomCliente.Contains(nombre) && x.Estado == true).ToListAsync();
         }
 
         public async Task<bool> Insert(Cliente cliente)
