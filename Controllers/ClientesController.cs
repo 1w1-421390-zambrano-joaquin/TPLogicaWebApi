@@ -28,14 +28,14 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("{nombre}")]
+        [HttpGet("/buscar/{nombre}")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(nombre))
                     return BadRequest("El nombre no puede estar vacio.");
-                return Ok(await _service.TraerTodo());
+                return Ok(await _service.TraerNombre(nombre));
             }
             catch (Exception ex)
             {
