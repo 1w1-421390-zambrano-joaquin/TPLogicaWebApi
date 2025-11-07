@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 
@@ -71,12 +72,12 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="admin,vendedor")]
         public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
         {
             
             try
             {
-                
                return Ok( await _service.CrearFactura(dto)); 
             }
             catch (KeyNotFoundException ex) 

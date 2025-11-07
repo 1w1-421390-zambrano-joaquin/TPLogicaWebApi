@@ -97,6 +97,7 @@ namespace TPLogicaWebApi.Controllers
             foreach (var auth in usuario.Autenticacions)
             {
                 claims.Add(new Claim(ClaimTypes.Role, auth.IdRolNavigation.Rol));
+                //claims.Add(new Claim(ClaimTypes., auth.IdRolNavigation.Rol));
             }
 
             
