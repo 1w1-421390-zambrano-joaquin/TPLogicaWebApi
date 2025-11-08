@@ -86,7 +86,7 @@ namespace TPLogicaWebApi.Controllers
             var claims = new List<Claim>
             {
                 
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.IdUsuario.ToString()), 
+                new Claim(JwtRegisteredClaimNames.Sub, usuario.IdEmpleado.ToString()),
                 
                 new Claim(JwtRegisteredClaimNames.Email, usuario.IdCredencialNavigation.Email), 
                 
@@ -97,7 +97,6 @@ namespace TPLogicaWebApi.Controllers
             foreach (var auth in usuario.Autenticacions)
             {
                 claims.Add(new Claim(ClaimTypes.Role, auth.IdRolNavigation.Rol));
-                //claims.Add(new Claim(ClaimTypes., auth.IdRolNavigation.Rol));
             }
 
             

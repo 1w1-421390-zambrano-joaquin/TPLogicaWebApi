@@ -35,6 +35,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("all")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAllFactura()
         {
             try
@@ -52,7 +53,9 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, error);
             }
         }
+
         [HttpGet("ultima")]
+        //[Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetUltimaFactura()
         {
             try
@@ -72,7 +75,7 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles ="admin,vendedor")]
+        //[Authorize(Roles ="admin,vendedor")]
         public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
         {
             
