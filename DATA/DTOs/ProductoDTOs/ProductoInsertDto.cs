@@ -13,7 +13,7 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
         public string? PrincipioActivo { get; set; }
 
         [Required(ErrorMessage = "El Contenido es obligatorio.")]
-        [Range(0.01, 500, ErrorMessage = "La cantidad debe ser mayor a 0")]
+        [Range(0.01, 99999, ErrorMessage = "La cantidad debe ser mayor a 0")]
         public decimal ContenidoCantidad { get; set; }
 
         [Required(ErrorMessage = "La unidad de medida es obligatorio.")]
@@ -21,14 +21,14 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
         public string? UnidadMedida { get; set; }
 
         [Required(ErrorMessage = "El Nro de lote es obligatorio.")]
-        [Range(1, 500, ErrorMessage = "El número de lote debe ser mayor a 0")]
+        [Range(1, 99999999, ErrorMessage = "El número de lote debe ser mayor a 0")]
         public int NroLote { get; set; }
 
         [Required(ErrorMessage = "La fecha de vencimiento es obligatoria.")]
         public DateOnly FVencimiento { get; set; }
 
         [Required(ErrorMessage = "El stock es obligatorio.")]
-        [Range(0, 500, ErrorMessage = "El stock no puede ser negativo.")]
+        [Range(0, 99999, ErrorMessage = "El stock no puede ser negativo.")]
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "El proveedor es obligatorio.")]
