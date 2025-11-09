@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TPLogicaWebApi.DATA.Models;
 using TPLogicaWebApi.DATA.Repositories.Implementations;
 using TPLogicaWebApi.DATA.Repositories.Interfaces;
@@ -6,20 +9,12 @@ using TPLogicaWebApi.DATA.Services.Implementations;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 builder.Services.AddDbContext<FarmaciaTPLogica1Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
-
-
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<IFacturaRepository, FacturarRepository>();
@@ -40,16 +35,29 @@ builder.Services.AddCors(options =>
         policy
             .WithOrigins(
                 "http://127.0.0.1:5500",  // Live Server por IP
-                "http://localhost:5500"   // Live Server por hostname
-                                          // agrega aquí otros orígenes de tu web si corresponde (https, dominio real, etc.)
+                "http://localhost:5500"   // Live Server por hostname            // agrega aquí otros orígenes de tu web si corresponde (https, dominio real, etc.)
             )
             .AllowAnyHeader()
             .AllowAnyMethod();
-        // Si usas cookies/autenticación por cookie:
-        // .AllowCredentials();
     });
 });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
+builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
@@ -60,11 +68,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();

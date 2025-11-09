@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TPLogicaWebApi.DATA.DTOs.ClientesDTOs;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 
@@ -8,6 +9,7 @@ namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientesController : ControllerBase
     {
         private IClienteService _service;
@@ -17,6 +19,7 @@ namespace TPLogicaWebApi.Controllers
         }
        
         [HttpGet]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -29,6 +32,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("buscar/{nombre}")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try
@@ -44,6 +48,7 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpGet("Estado")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetActivo()
         {
             try
@@ -58,6 +63,7 @@ namespace TPLogicaWebApi.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{dni:int}")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetDNI(int dni)
         {
             try
@@ -76,6 +82,7 @@ namespace TPLogicaWebApi.Controllers
 
         // POST api/<ClientesController>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PostCliente([FromBody] ClienteInsertDto cliente)
         {
             try
@@ -89,6 +96,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutCliente(int id,[FromBody] ClienteUpdateDto cliente)
         {
             try
@@ -101,7 +109,5 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
-
     }
 }

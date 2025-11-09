@@ -11,6 +11,7 @@ namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin,vendedor")]
     public class FacturasController : ControllerBase
     {
         private IFacturaService _service;

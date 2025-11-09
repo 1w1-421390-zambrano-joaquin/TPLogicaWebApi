@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TPLogicaWebApi.DATA.DTOs.EmpleadosDTOs;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -9,6 +10,7 @@ namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class EmpleadosController : ControllerBase
     {
         private IEmpleadoService _service;
