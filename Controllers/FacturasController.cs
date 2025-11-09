@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TPLogicaWebApi.DATA.DTOs.FacturasDTOs;
+using TPLogicaWebApi.DATA.Services.Implementations;
 using TPLogicaWebApi.DATA.Services.Interfaces;
+using TPLogicaWebApi.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -73,30 +75,54 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, error);
             }
         }
-
         [HttpPost]
-        //[Authorize(Roles ="admin,vendedor")]
-        public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
+        public async Task<IActionResult> CrearFactura([FromBody] FacturaInsertDto dto)
         {
-            
-            try
-            {
-               return Ok( await _service.CrearFactura(dto)); 
-            }
-            catch (KeyNotFoundException ex) 
-            {
-                return BadRequest(ex.Message); 
-            }
-            catch (InvalidOperationException ex) 
-            {
-                return BadRequest(ex.Message); 
-            }
-            catch (Exception ex)
-            {
-                var error = ex.InnerException?.Message ?? ex.Message;
-                return StatusCode(500, error);
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var facturaCreada = await _service.CrearFactura(dto);
+
+            return Ok(facturaCreada);
         }
+
+        [HttpGet("{id}/pdf")]
+        public async Task<IActionResult> GetFacturaPdf(int id)
+        {
+            var factura = await _service.ObtenerFacturaPdf(id);
+            if (factura == null)
+                return NotFound("Factura no encontrada");
+
+            var pdfBytes = FacturaPdfGenerator.Generar(factura);
+
+            // ACA FLACO!!
+            return File(pdfBytes,
+                "application/pdf",
+                $"Factura_{factura.IdFactura}.pdf");
+        }
+        //[HttpPost]
+        ////[Authorize(Roles ="admin,vendedor")]
+        //public async Task<IActionResult> CreateFactura([FromBody] FacturaInsertDto dto)
+        //{
+
+        //    try
+        //    {
+        //       return Ok( await _service.CrearFactura(dto)); 
+        //    }
+        //    catch (KeyNotFoundException ex) 
+        //    {
+        //        return BadRequest(ex.Message); 
+        //    }
+        //    catch (InvalidOperationException ex) 
+        //    {
+        //        return BadRequest(ex.Message); 
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var error = ex.InnerException?.Message ?? ex.Message;
+        //        return StatusCode(500, error);
+        //    }
+        //}
 
 
     }

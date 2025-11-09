@@ -11,9 +11,6 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
         {
             _context = context;
         }
-
-        
-
         public async Task<List<Producto>> GetAll()
         {
             return await _context.Productos.AsNoTracking().ToListAsync();

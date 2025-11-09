@@ -101,5 +101,35 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
             
            await _context.Facturas.AddAsync(factura);
         }
+
+        public async Task<FacturaPdfDto?> GetFacturaPdf(int idFactura)
+        {
+            {
+                var factura = await _context.Facturas
+                    .Include(f => f.IdClienteNavigation)
+                    .Include(f => f.IdEmpleadoNavigation)
+                    .Include(f => f.DetalleFacturas)
+                        .ThenInclude(d => d.IdProductoNavigation)
+                    .FirstOrDefaultAsync(f => f.NroFactura == idFactura);
+
+                if (factura == null)
+                    return null;
+
+                return new FacturaPdfDto
+                {
+                    IdFactura = factura.NroFactura,
+                    TipoFactura = factura.TipoFactura,
+                    Fecha = factura.FechaFactura.ToDateTime(new TimeOnly(0, 0)),
+                    ClienteNombre = factura.IdClienteNavigation?.NomCliente ?? "N/D",
+                    EmpleadoNombre = factura.IdEmpleadoNavigation?.NomEmp ?? "N/D",
+                    Detalles = factura.DetalleFacturas.Select(d => new FacturaPdfDetalleDto
+                    {
+                        ProductoNombre = d.IdProductoNavigation?.NombreComercial ?? $"Prod {d.IdProducto}",
+                        Cantidad = d.Cantidad,
+                        PrecioUnitario = d.PrecioUnitario
+                    }).ToList()
+                };
+            }
+        }
     }
 }

@@ -70,6 +70,20 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetEmpleadoById(int id)
+        {
+            try
+            {
+                if (id < 0)
+                    return BadRequest("El id es requisito.");
+                return Ok(await _service.TraerId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         // POST api/<EmpleadosController>
         [HttpPost]
         public async Task<IActionResult> PostEmpleado([FromBody] EmpleadoInsertDto empleado)

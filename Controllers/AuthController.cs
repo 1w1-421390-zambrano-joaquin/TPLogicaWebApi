@@ -7,8 +7,6 @@ using TPLogicaWebApi.DATA.DTOs.UsuariosDTOs;
 using TPLogicaWebApi.DATA.Models;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -90,7 +88,9 @@ namespace TPLogicaWebApi.Controllers
                 
                 new Claim(JwtRegisteredClaimNames.Email, usuario.IdCredencialNavigation.Email), 
                 
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                
+                new Claim(JwtRegisteredClaimNames.Iat,DateTime.Now.ToString())
             };
 
             
