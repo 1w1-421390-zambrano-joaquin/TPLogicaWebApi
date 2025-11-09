@@ -11,24 +11,24 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
         [StringLength(50, ErrorMessage ="El principio activo no puede tener más de 50 caracteres.")]
         public string? PrincipioActivo { get; set; }
 
-        [Range(0.01, 500, ErrorMessage = "La cantidad debe ser mayor a 0")]
+        [Range(0.01, 999999999, ErrorMessage = "La cantidad debe ser mayor a 0")]
         public decimal ContenidoCantidad { get; set; }
 
         [StringLength(10, ErrorMessage = "La unidad de medida no puede tener más de 10 caracteres.")]
         public string? UnidadMedida { get; set; }
 
-        [Range(1, 500, ErrorMessage = "El número de lote debe ser mayor a 0")]
+        [Range(1, 999999999, ErrorMessage = "El número de lote debe ser mayor a 0")]
         public int NroLote { get; set; }
 
         public DateOnly FVencimiento { get; set; }
 
-        [Range(0, 500, ErrorMessage = "El stock no puede ser negativo.")]
+        [Range(0, 999999999, ErrorMessage = "El stock no puede ser negativo.")]
         public int Stock { get; set; }
 
         [StringLength(100, ErrorMessage = "El proveedor no puede tener más de 100 caracteres.")]
         public string? Proveedor { get; set; }
 
-        [Range(0, 500, ErrorMessage = "El precio no puede ser negativo.")]
+        [Range(0, 999999999999, ErrorMessage = "El precio no puede ser negativo.")]
         public int Precio { get; set; }
     }
 }
