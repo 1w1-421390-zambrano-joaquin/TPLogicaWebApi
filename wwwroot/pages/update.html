@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Modificar Producto - Farmacia Farma Ciudad</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../assets/cruzar.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/update.css">
+</head>
+
+<body data-page="productos-abm">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="dashboard" data-roles="admin">
+        <h5 class="text-white text-center mb-2">Sistema de gestión de farmacia</h5>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent custom-nav mb-2" id="mainNavbar">
+            <div class="container-fluid">
+                <img class="iconoNav" src="../assets/cruzar.png" width="30" height="30" alt="Cruz Farmacia">
+                <a class="navbar-brand fs-5 fw-bold text-light" href="#"></a>
+                <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item me-2">
+                            <a class="nav-link text-black" href="./main.html" data-roles="admin" data-section="Dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link text-black" href="./ventas.html" data-roles="admin"
+                                data-section="Registro de nueva venta">Agregar
+                                venta</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link text-black active-link" href="#" data-roles="admin"
+                                data-section="Modificar/borrar producto">Modificar/borrar producto</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link text-black" href="./insert.html" data-roles="admin" data-section="Agregar
+                                        producto">Agregar producto</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn"><a href="./login.html" data-roles="admin,vendedor" class="me-2 icon-link icon-link-hover">Salir<i
+                            class="icon-link icon-link-hover bi bi-box-arrow-right"></i></a></button>
+                </div>
+            </div>
+        </nav>
+        <div class="dashboard-content text-white mt-3 flex-grow-1 justify-content-center">
+            <div class="row main-row justify-content-center">
+                <div class="row justify-content-center w-100">
+                    <div class="col-lg-12">
+                        <div class="card shadow-sm card-dashboard">
+                            <div class="card-header bg-primary card-header-dark">
+                                <h5 class="mb-0 text-light"><i class="fas fa-edit"></i> Buscar y editar Producto</h5>
+                            </div>
+                            <div class="card-body">
+
+                                <span>Ingrese producto:</span>
+                                <div
+                                    class="mb-4 border border-black rounded-3 px-2 py-2 d-flex flex-row justify-content-between align-items-center col-12">
+                                    <div class="col-8">
+                                        <div class="d-flex flex-row col-10">
+                                            <input id="productoFilter" type="text"
+                                                class="form-control form-control-sm me-2 w-50 bg-dark"
+                                                placeholder="Filtrar producto por nombre">
+
+                                            <select id="productoSelect" class="form-select form-select-sm">
+                                                <option value="">— Seleccionar producto —</option>
+                                            </select>
+                                        </div>
+                                        <small id="productoSelectMsg" class="text-danger d-none"></small>
+                                    </div>
+                                    <div class="ms-3 col-3">
+                                        <span for="codProd" class="fw-lighter text-light" id="codProd"></span>
+                                    </div>
+                                </div>
+
+                                <form id="form-modificar-producto" class="row g-3">
+
+                                    <div class="row g-3 align-items-end">
+                                        <!-- Lote: corto -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="lote" class="form-label text-light">Lote</label>
+                                            <input type="number" class="form-control bg-dark" id="lote" min="0"
+                                                style="max-width: 90px;">
+                                        </div>
+
+                                        <!-- Nombre comercial: que respire, ocupa el espacio sobrante -->
+                                        <div class="col-12 col-md">
+                                            <label for="nombreComercial" class="form-label text-light">Nombre
+                                                comercial</label>
+                                            <input type="text" class="form-control bg-dark" id="nombreComercial"
+                                                placeholder="Nombre medicamento" required>
+                                        </div>
+
+                                        <!-- Proveedor: medio -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="proveedor" class="form-label text-light">Proveedor</label>
+                                            <input type="text" class="form-control bg-dark" id="proveedor"
+                                                style="max-width: 180px;" required>
+                                        </div>
+
+                                        <!-- Stock: corto -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="stock" class="form-label text-light">Stock</label>
+                                            <input type="number" class="form-control bg-dark" id="stock" min="0"
+                                                style="max-width: 90px;" required>
+                                        </div>
+
+                                        <!-- Precio: corto/medio -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="precioUnitario" class="form-label text-light">Precio ($)</label>
+                                            <input type="number" class="form-control bg-dark" id="precioUnitario"
+                                                step="0.01" min="0" style="max-width: 120px;" required>
+                                        </div>
+
+                                        <!-- Principio activo: un poco más ancho -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="principioActivo" class="form-label text-light">Principio
+                                                activo</label>
+                                            <input type="text" class="form-control bg-dark" id="principioActivo"
+                                                placeholder="Princ. act." style="max-width: 220px;">
+                                        </div>
+
+                                        <!-- Unidad de medida: corto -->
+                                        <div class="col-6 col-md-auto">
+                                            <label for="unidadMedida" class="form-label text-light">Un. med.</label>
+                                            <input type="text" class="form-control bg-dark" id="unidadMedida"
+                                                placeholder="mg, ml" style="max-width: 90px;">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mt-2 d-flex align-items-end g-3">
+                                        <div class="col-auto">
+                                            <label for="contenidoCantidad" class="form-label text-light">Contenido
+                                                cantidad</label>
+                                            <input type="number" class="form-control bg-dark" id="contenidoCantidad"
+                                                placeholder="Cantidad" style="max-width: 140px;">
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <label for="fVencimiento" class="form-label text-light">Fecha de
+                                                Vencimiento</label>
+                                            <input type="date" class="form-control bg-dark" id="fVencimiento"
+                                                value="2026-12-31">
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <button type="submit" value="guardarCambios" id="btnGuardarCambios"
+                                                class="btn btn-warning text-dark px-4">
+                                                Actualizar
+                                            </button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" value="bajaProducto" id="btnBajaProducto"
+                                                class="btn btn-danger px-4">
+                                                Dar de baja
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        const links = document.querySelectorAll(".nav-link, .dropdown-item");
+        links.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                links.forEach(l => l.classList.remove("active-link"));
+                this.classList.add("active-link");
+                const section = this.getAttribute("data-section");
+
+            });
+        });
+    </script> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+        <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const auth = requireAuth(['admin','vendedor']); // protege la página
+    if (!auth) return;
+
+    const roles = auth.roles; // viene en minúsculas desde auth.js
+
+    // Mostrar/ocultar según data-roles
+    document.querySelectorAll('[data-roles]').forEach(el => {
+      const allowed = el.dataset.roles
+        .split(',')
+        .map(r => r.trim().toLowerCase())
+        .filter(Boolean);
+
+      const canSee = roles.some(r => allowed.includes(r));
+      if (!canSee) {
+        el.classList.add('d-none'); // o el.remove();
+      }
+    });
+
+    // Logout
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+      btnLogout.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.clear();
+        window.location.href = '../index.html';
+      });
+    }
+  });
+</script>
+    <script src="../js/update.js"></script>
+</body>
+
+</html>

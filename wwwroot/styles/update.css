@@ -1,0 +1,285 @@
+/* ------------------ REGLAS BASE ------------------ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Importante: solo dashboard hará scroll */
+  background-color: #080710;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ------------------ FONDO CON BURBUJAS ------------------ */
+.background {
+  width: 430px;
+  height: 520px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+.shape:first-child {
+  background: linear-gradient(#1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+.shape:last-child {
+  background: linear-gradient(to right, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+
+/* ------------------ DASHBOARD ------------------ */
+.dashboard {
+  position: relative;
+  z-index: 1;
+  margin: 20px auto;
+  width: 96vw;
+  max-width: 1400px;
+  height: calc(100vh - 40px); 
+  background-color: rgba(255, 255, 255, 0.073);
+  border-radius: 10px;
+  backdrop-filter: blur(200px);
+  border: 2px solid rgba(255, 255, 255, 0.022);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.4;
+   font-weight: 200!important;
+}
+
+/* ------------------ CONTENIDO CON SCROLL (scroll está en .main-row) ------------------ */
+.dashboard-content {
+  flex: 1;
+  overflow: hidden;           /* cede el scroll al hijo .main-row */
+  margin-top: 10px;
+  display: flex;
+}
+.main-row{
+  flex: 1;
+  min-height: 0;          /* imprescindible en flex */
+  overflow-y: auto !important;  /* << aquí el scroll */
+  overflow-x: hidden;
+  height: 100%;
+}
+/* Chrome / Edge / Safari */
+.main-row::-webkit-scrollbar-button {
+  display: none!important;   /* oculta los botones arriba/abajo */
+  width: 0;
+  height: 0;
+}
+
+/* WebKit / Blink (Chrome, Edge, Safari, Opera) */
+.main-row::-webkit-scrollbar{
+  width: 10px;                     /* grosor de la barra */
+}
+.main-row::-webkit-scrollbar-track{
+  background: rgba(255,255,255,.16);  /* pista clarita */
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 6px rgba(0,0,0,.25);     /* leve “inset” tipo vidrio */
+}
+.main-row::-webkit-scrollbar-thumb{
+  background-color: #d1d1d8;       /* pulgar claro */
+  border-radius: 10px;
+  border: 2px solid transparent;   /* se ve más fino */
+  background-clip: padding-box;
+}
+.main-row::-webkit-scrollbar-thumb:hover{
+  background-color: #ececf1;       /* hover más claro */
+}
+
+/* Firefox */
+.main-row{
+  scrollbar-width: auto;                       /* fina */
+  scrollbar-color: #d1d1d8 rgba(255,255,255,.16); /* thumb | track */
+  scrollbar-gutter: stable both-edges;         /* evita “saltos” al aparecer */
+}
+/* Scrollbar estética idéntica a la de tus otras vistas */
+.main-row::-webkit-scrollbar { width: 8px; }
+
+.main-row::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255,255,255,.6);
+}
+.main-row {                       /* Firefox + estabilidad */
+  scrollbar-width:auto;
+  scrollbar-color: rgba(255,255,255,.35) transparent;
+  scrollbar-gutter: stable both-edges;
+}
+
+/* ------------------ NAVBAR ------------------ */
+.custom-nav {
+  padding: 4px 8px;
+  min-height: 36px;
+  background-color: rgba(255, 255, 255, 0.203) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 10!important;
+}
+.navbar .nav-link {
+  padding: 2px 6px !important;
+  font-size: 12px;
+    font-weight: 400!important;
+}
+.navbar .container-fluid { align-items: center; }
+.dropdown { z-index: 93333330!important; }
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #000000 !important;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+.dropdown-menu {
+  z-index: 9000 !important;
+  position: absolute !important;
+  background-color: white !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.navbar, .navbar-collapse { position: relative !important; z-index: 100!important; }
+.dropdown-item { color: #000000 !important; font-size: 80%; }
+.nav-item :hover { color: #ffffff !important; }
+.nav-item .dropdown-menu :hover { color: #1e2255 !important; background-color: #d0d2d4; }
+
+/* ------------------ TÍTULOS ------------------ */
+h1, h2, h3, h4, h5 { font-size: 95%; margin-bottom: 0.5rem; }
+
+/* ------------------ CARDS ------------------ */
+.card {
+  border: none;
+  background-color: #161b22;
+  color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  padding: 8px;
+}
+.card-header {
+  font-weight: 600;
+  border-bottom: none !important;
+  padding: 0.5rem 0.75rem;
+  background-color: #1f252b !important;
+  color: #f8f9fa !important;
+}
+.card-body { padding: 0.75rem; }
+#productos-section .card-header { border-left: 5px solid #0d6efd; }
+#empleado-section .card-header  { border-left: 5px solid #0dcaf0; }
+#cliente-section .card-header   { border-left: 5px solid #ffc107; }
+#factura-data-section .card-header { border-left: 5px solid #ffc107; }
+.horaLogueo{ font-size: smaller; }
+
+/* ------------------ DETALLES FACTURA ------------------ */
+.detail-factura-container { display: flex; flex-direction: column; }
+
+/* (Si necesitas scrolls internos, define sus max-height aquí) */
+.table-scroll-container { overflow-y: auto; max-height: 250px; }
+.product-list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #1f252b;
+}
+
+/* ------------------ TABLAS Y FORMULARIOS ------------------ */
+.table-dark-styled {
+  --bs-table-color: #f8f9fa;
+  --bs-table-bg: #1f252b;
+  --bs-table-border-color: #30363d;
+  --bs-table-striped-bg: #161b22;
+  --bs-table-hover-bg: #272c33;
+  width: 100%;
+  margin-bottom: 0 !important;
+}
+.table-secondary { --bs-table-bg: #30363d; color: #f8f9fa; }
+.table th, .table td { font-size: 12px; padding: 6px !important; }
+
+.form-control, .form-select {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #1f252b;
+  border-color: #30363d;
+  color: #f8f9fa;
+}
+input[type="number"] { height: 28px; font-size: 12px; }
+.form-control:focus, .form-select:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 0.25rem rgba(88, 166, 255, 0.25);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #1f252b inset !important;
+  -webkit-text-fill-color: #f8f9fa !important;
+  caret-color: #f8f9fa;
+}
+
+/* ------------------ BOTONES ------------------ */
+.btn, .btn-sm, .btn-light, .btn-outline-primary {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+}
+.btn-light { background-color: #f8f9fa !important; color: #000 !important; }
+.btn-outline-secondary, .btn-outline-warning, .btn-outline-primary {
+  color: #c9d1d9; border-color: #484f58;
+}
+.btn-outline-secondary:hover, .btn-outline-warning:hover, .btn-outline-primary:hover {
+  color: #212529; background-color: #c9d1d9;
+}
+
+/* ------------------ TEXTO GLOBAL ------------------ */
+* { color: #c9d1d9 !important; }
+
+/* ------------------ GARANTÍA ANTI-SCROLL HORIZONTAL ------------------ */
+.container, .container-fluid, .row, .col, [class*="col-"] {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* --- Prioridades de capas (z-index) para dropdown sobre sticky --- */
+#mainNavbar.custom-nav { position: relative !important; z-index: 1030 !important; overflow: visible !important; }
+.sticky-top.locacion.custom-nav { position: sticky; z-index: 1020 !important; overflow: visible !important; }
+.navbar .dropdown-menu { position: absolute !important; z-index: 1060 !important; }
+
+/* (Si tenías .dashboard { overflow: visible; } y te recortaba cosas, podés quitarlo;
+   el scroll ahora está en .main-row y no afecta a tus otras páginas) */
+/* === Quitar flechas del scrollbar en .main-row (WebKit/Blink) === */
+/* En Chromium actual las flechas usan variantes nuevas: hay que cubrir TODAS */
+/* ===== Ocultar por completo la barra de scroll en .main-row ===== */
+/* Firefox */
+.main-row{
+  -ms-overflow-style: none;   /* IE/Edge Legacy */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* WebKit/Blink (Chrome, Edge, Safari, Opera) */
+.main-row::-webkit-scrollbar{
+  width: 0 !important;        /* oculta barra vertical */
+  height: 0 !important;       /* oculta barra horizontal */
+}
+.main-row::-webkit-scrollbar-thumb,
+.main-row::-webkit-scrollbar-track,
+.main-row::-webkit-scrollbar-button,
+.main-row::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Por si quedaron estilos previos que forzaban tamaño/color */
+.main-row::-webkit-scrollbar-thumb:hover { background: transparent !important; }
+

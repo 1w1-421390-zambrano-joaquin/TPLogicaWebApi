@@ -1,0 +1,316 @@
+/* ------------------ REGLAS BASE ------------------ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Importante: solo dashboard hará scroll */
+  background-color: #080710;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ------------------ FONDO CON BURBUJAS ------------------ */
+.background {
+  width: 430px;
+  height: 520px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+.shape:first-child {
+  background: linear-gradient(#1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+.shape:last-child {
+  background: linear-gradient(to right, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+
+/* ------------------ DASHBOARD ------------------ */
+.dashboard {
+  position: relative;
+  z-index: 1;
+  margin: 20px auto;
+  width: 96vw;
+  max-width: 1400px;
+  height: calc(100vh - 40px); 
+  background-color: rgba(255, 255, 255, 0.073);
+  border-radius: 10px;
+  backdrop-filter: blur(200px);
+  border: 2px solid rgba(255, 255, 255, 0.022);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.4;
+   font-weight: 200!important;
+}
+
+/* ------------------ CONTENIDO CON SCROLL DIVIDIDO ------------------ */
+.dashboard-content {
+  flex: 1;
+  overflow: hidden;   /* el scroll vive en las columnas */
+  padding-right: 12px;
+  margin-top: 10px;
+  display: flex;
+}
+.main-row{
+  flex: 1;
+  min-height: 0;          /* imprescindible en flex */
+  overflow-y: auto !important;  /* << aquí el scroll */
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* Scroll independiente en cada columna */
+.main-row > section,
+.main-row > aside {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+}
+/* Scrollbar estética */
+.main-row > section::-webkit-scrollbar,
+.main-row > aside::-webkit-scrollbar { width: 8px; }
+.main-row > section::-webkit-scrollbar-thumb,
+.main-row > aside::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+.main-row > section::-webkit-scrollbar-thumb:hover,
+.main-row > aside::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.main-row > section {
+  overflow-y: auto;
+  min-height: 0; /* importante en flex para permitir overflow del hijo */
+}
+/* ------------------ NAVBAR ------------------ */
+.custom-nav {
+  padding: 4px 8px;
+  min-height: 36px;
+  background-color: rgba(255, 255, 255, 0.203) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 10!important;
+}
+.navbar .nav-link {
+  padding: 2px 6px !important;
+  font-size: 12px;
+    font-weight: 400!important;
+}
+.navbar .container-fluid { align-items: center; }
+.dropdown { z-index: 93333330!important; }
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #000000 !important;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+.dropdown-menu {
+  z-index: 9000 !important;
+  position: absolute !important;
+  background-color: white !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.navbar, .navbar-collapse { position: relative !important; z-index: 100!important; }
+.dropdown-item { color: #000000 !important; font-size: 80%; }
+.nav-item :hover { color: #ffffff !important; }
+.nav-item .dropdown-menu :hover { color: #1e2255 !important; background-color: #d0d2d4; }
+
+/* ------------------ TÍTULOS ------------------ */
+h1, h2, h3, h4, h5 { font-size: 95%; margin-bottom: 0.5rem; }
+
+/* ------------------ CARDS ------------------ */
+.card {
+  border: none;
+  background-color: #161b22;
+  color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  padding: 8px;
+}
+.card-header {
+  font-weight: 600;
+  border-bottom: none !important;
+  padding: 0.5rem 0.75rem;
+  background-color: #1f252b !important;
+  color: #f8f9fa !important;
+}
+.card-body { padding: 0.75rem; }
+#productos-section .card-header { border-left: 5px solid #0d6efd; }
+#empleado-section .card-header  { border-left: 5px solid #0dcaf0; }
+#cliente-section .card-header   { border-left: 5px solid #ffc107; }
+#factura-data-section .card-header { border-left: 5px solid #ffc107; }
+.horaLogueo{
+  font-size: smaller;
+}
+#productos-section {
+  height: auto;
+}
+.product-list-container,
+.table-scroll-container {
+  max-height: none;      /* antes: 200px / 250px */
+  overflow-y: visible;   /* deja que el contenido expanda la tarjeta */
+}
+/* ------------------ DETALLES FACTURA ------------------ */
+.detail-factura-container { display: flex; flex-direction: column; }
+.table-scroll-container { overflow-y: auto; max-height: 250px; }
+.product-list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #1f252b;
+}
+.list-group-item { background-color: #1f252b; color: #f8f9fa; border-color: #30363d; }
+.list-group-item:hover { background-color: #000000!important; }
+.list-group-item h6 { font-size: 13px; }
+.list-group-item small { font-size: 11px; }
+
+/* ------------------ TABLAS Y FORMULARIOS ------------------ */
+.table-dark-styled {
+  --bs-table-color: #f8f9fa;
+  --bs-table-bg: #1f252b;
+  --bs-table-border-color: #30363d;
+  --bs-table-striped-bg: #161b22;
+  --bs-table-hover-bg: #272c33;
+  width: 100%;
+  margin-bottom: 0 !important;
+}
+.table-secondary { --bs-table-bg: #30363d; color: #f8f9fa; }
+.table th, .table td { font-size: 12px; padding: 6px !important; }
+.form-control, .form-select {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #1f252b;
+  border-color: #30363d;
+  color: #f8f9fa;
+}
+input[type="number"] { height: 28px; font-size: 12px; }
+.form-control:focus, .form-select:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 0.25rem rgba(88, 166, 255, 0.25);
+}
+
+/* ------------------ BOTONES ------------------ */
+.btn, .btn-sm, .btn-light, .btn-outline-primary {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+}
+.btn-light { background-color: #f8f9fa !important; color: #000 !important; }
+.btn-outline-secondary, .btn-outline-warning, .btn-outline-primary {
+  color: #c9d1d9; border-color: #484f58;
+}
+.btn-outline-secondary:hover, .btn-outline-warning:hover, .btn-outline-primary:hover {
+  color: #212529; background-color: #c9d1d9;
+}
+
+* { color: #c9d1d9 !important; }
+
+/* ------------------ GARANTÍA ANTI-SCROLL HORIZONTAL ------------------ */
+.container, .container-fluid, .row, .col, [class*="col-"] {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.form-control,
+.form-select {
+  background-color: #1f252b;
+  color: #f8f9fa;
+  border-color: #30363d;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #1f252b;         /* <- evita que Bootstrap lo ponga blanco */
+  color: #f8f9fa;                     /* texto claro sobre fondo oscuro */
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 0.25rem rgba(88,166,255,.25);
+}
+
+/* Placeholder legible en tema oscuro */
+.form-control::placeholder {
+  color: #9aa4b2;
+  opacity: 1;
+}
+
+/* Cursor y selección */
+.form-control, .form-select { caret-color: #f8f9fa; }
+::selection { background: rgba(88,166,255,.35); color: #fff; }
+
+/* Chrome/Safari autofill (evita amarillo) */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #1f252b inset !important;
+  -webkit-text-fill-color: #f8f9fa !important;
+  caret-color: #f8f9fa;
+}
+
+/* Deshabilitados coherentes */
+.form-control:disabled, .form-select:disabled {
+  background-color: #141920;
+  color: #a6b0bb;
+}
+/* Ocultar barra de scroll pero permitir desplazamiento */
+.product-list-container {
+  /* ya tienes overflow-y: auto; mantenlo */
+  -ms-overflow-style: none;     /* IE/Edge antiguos */
+  scrollbar-width: none;        /* Firefox */
+}
+.product-list-container::-webkit-scrollbar {
+  display: none;                /* Chrome/Safari/Edge (Blink/WebKit) */
+}
+/* --- Prioridades de capas (z-index) bien ordenadas --- */
+
+/* La barra de navegación debe estar por encima del título sticky */
+#mainNavbar.custom-nav {
+  position: relative !important;
+  z-index: 1030 !important;      /* más alto que la barra de título */
+  overflow: visible !important;   /* por si acaso, que no recorte el dropdown */
+}
+
+/* La barra sticky del título puede quedar por debajo de la navbar */
+.sticky-top.locacion.custom-nav {
+  position: sticky;
+  z-index: 1020 !important;       /* debajo de la navbar, encima del contenido */
+  overflow: visible !important;
+}
+
+/* Aseguramos que el dropdown flote por encima del sticky title */
+.navbar .dropdown-menu {
+  position: absolute !important;
+  z-index: 1060 !important;       /* > 1030 para ganar a la navbar y al sticky */
+}
+
+/* Evita que el contenedor general recorte el dropdown si llega al borde */
+.dashboard {
+  overflow: visible;               /* si preferís: visible; no afecta tus scrolls por columna */
+}
+
+/* Mantener los scrolls independientes de section/aside tal como los tenés */
+.main-row > section,
+.main-row > aside {
+  overflow-y: auto;
+  min-height: 0;
+}

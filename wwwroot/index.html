@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Farmacia</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="shortcut icon" href="./assets/cruzar.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"rel="stylesheet">
+</head>
+
+<body data-page="dashboard">
+    <!-- Fondo con burbujas -->
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <!-- Dashboard -->
+    <div class="dashboard" data-roles="admin">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent custom-nav mb-0" id="mainNavbar">
+            <div class="container-fluid">
+                <img class="iconoNav" src="../assets/cruzar.png" width="30" height="30" alt="Cruz Farmacia">
+                <h5 class="mb-0">Sistema de gestión de farmacia</h5>
+
+                <div>
+                </div>
+            </div>
+        </nav>
+        <div class="dashboard-content text-dark mt-3 p-0">
+            <div class="p-1">
+                <div class="">
+                    <p class="mb-2">Introduccion: </p>
+                    <p class="text-justify mb-1">Este portal cuenta con diferentes secciones donde tendra un resumen de las
+                        facturas vendidas en un Dashboard, una
+                        sección para realizar una transacción de tipo venta, otra para dar de alta productos y
+                        finalmente una sección para modificar o eliminar productos si lo desea.</p>
+                    <p class="text-justify">El uso de las distintas secciones está restringido según su rol asignado
+                        (usuario registrado), será capaz de acceder a: </p>
+                    <div class="col-12 d-flex justify-content-between">
+                        <div class="table-responsive p-3 col-6">
+                            <table class="table table-dark align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Dashboard</th>
+                                        <th scope="col">Ventas</th>
+                                        <th scope="col">Alta</th>
+                                        <th scope="col">Modifacion</th>
+                                        <th scope="col">Baja</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="table-group-divider">
+                                    <tr>
+                                        <th scope="row">Administrador</th>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Vendedor</th>
+                                        <td><i class="bi bi-x"></i></td>
+                                        <td><i class="bi bi-check-lg"></i></td>
+                                        <td><i class="bi bi-x"></i></td>
+                                        <td><i class="bi bi-x"></i></td>
+                                        <td><i class="bi bi-x"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <pre id="typewriter">
+                <span class="var-highlight">let</span> TPI_1W1 = [{
+                    Programador: <span class="string-highlight">'Brizzio Franco'</span>,
+                    Cant_HorasTrabajadas: <span class="string-highlight">'Infinity '</span>,
+                    Cant_HorasDormidas: <span class="string-highlight">null </span>},
+                    {
+                    Programador: <span class="string-highlight">'Zambrano Joaquín'</span>,
+                    Cant_HorasTrabajadas: <span class="string-highlight">'Infinity '</span>,
+                    Cant_HorasDormidas: <span class="string-highlight">null </span>}];
+                    </pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h6 class="mb-2">Datos tecnicos:</h6>
+                        <p class="text-justify">El front-end se desarrolló con HTML5, CSS3 y Bootstrap para la
+                            maquetación.
+                            La lógica en JavaScript consume la API del back-end mediante peticiones HTTP (GET, POST,
+                            PUT, DELETE), actualizando dinámicamente la interfaz según las respuestas del servidor.
+                        </p>
+                        <p class="text-justify">
+                            En el back-end se implementó una API RESTful en C# sobre ASP.NET, utilizando SQL Server como
+                            base de datos. La autenticación se realiza mediante JWT,
+                            y a partir del rol incluido en el token (administrador o vendedor) se controla el acceso a
+                            los endpoints y a las distintas secciones del sistema.
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center gap-2 mb-0">
+                        <!-- <div class="d-flex flex-column border-top border-end border-1 border-light rounded-2 p-2"
+                            style="--bs-border-opacity: .5;">
+                            <p class="mb-1 text-center">Creadores de esta maravilla:</p>
+                            <span>Legajo #421562- Brizzio Recchia Franco</span>
+                            <span>Legajo #421390 - Zambrano Joaquín</span>
+                        </div> -->
+                        <div>
+                            <span>
+                                Ingresar al sistema:
+                            </span><a href="./pages/login.html"><button class="btn btn-light ms-2"><i
+                                        class="bi bi-box-arrow-in-left fs-6 text-black"></i></button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="./js/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

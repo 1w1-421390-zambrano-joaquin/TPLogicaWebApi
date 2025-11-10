@@ -1,0 +1,370 @@
+/* ------------------ REGLAS BASE ------------------ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Importante: solo dashboard hará scroll */
+  background-color: #080710;
+
+}
+
+/* ------------------ FONDO CON BURBUJAS ------------------ */
+.background {
+  width: 430px;
+  height: 520px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+.shape:first-child {
+  background: linear-gradient(#1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+.shape:last-child {
+  background: linear-gradient(to right, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+
+/* ------------------ DASHBOARD ------------------ */
+.dashboard {
+  position: relative;
+  z-index: 1;
+  margin: 15px auto;
+  width: 90vw;
+  max-width: 1400px;
+  height: calc(100vh - 40px); 
+  background-color: rgba(0, 0, 0, 0.523);
+  border-radius: 10px;
+  backdrop-filter: blur(200px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.4;
+}
+/* ------------------ CONTENIDO CON SCROLL DIVIDIDO ------------------ */
+.dashboard-content.no-scrollbar,.dashboard-content.no-scrollbar::-webkit-scrollbar{
+  width: 0; height: 0;
+}
+.main-row {
+  flex: 1;
+  min-height: 0;      /* clave para que los hijos puedan overflow */
+  overflow: visible;
+  display: flex;
+}
+
+/* Scroll independiente en cada columna */
+.main-row > section,
+.main-row > aside {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar estética */
+.main-row > section::-webkit-scrollbar,
+.main-row > aside::-webkit-scrollbar { width: 8px; }
+.main-row > section::-webkit-scrollbar-thumb,
+.main-row > aside::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+.main-row > section::-webkit-scrollbar-thumb:hover,
+.main-row > aside::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ------------------ NAVBAR ------------------ */
+.custom-nav {
+  padding: 4px 8px;
+  min-height: 36px;
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 10!important;
+}
+.navbar .nav-link {
+  padding: 2px 6px !important;
+  font-size: 12px;
+}
+.navbar .container-fluid { align-items: center; }
+.dropdown { z-index: 93333330!important; }
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #000000 !important;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+.dropdown-menu {
+  z-index: 9000 !important;
+  position: absolute !important;
+  background-color: white !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.navbar, .navbar-collapse { position: relative !important; z-index: 100!important; }
+.dropdown-item { color: #000000 !important; font-size: 80%; }
+.nav-item :hover { color: #ffffff !important; }
+.nav-item .dropdown-menu :hover { color: #1e2255 !important; background-color: #d0d2d4; }
+
+/* ------------------ TÍTULOS ------------------ */
+
+
+/* ------------------ CARDS ------------------ */
+.card {
+  border: none;
+  background-color: #161b22;
+  color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  padding: 8px;
+}
+.card-header {
+  font-weight: 600;
+  border-bottom: none !important;
+  padding: 0.5rem 0.75rem;
+  background-color: #1f252b !important;
+  color: #f8f9fa !important;
+}
+.card-body { padding: 0.75rem; }
+#productos-section .card-header { border-left: 5px solid #0d6efd; }
+#empleado-section .card-header  { border-left: 5px solid #0dcaf0; }
+#cliente-section .card-header   { border-left: 5px solid #ffc107; }
+#factura-data-section .card-header { border-left: 5px solid #ffc107; }
+.horaLogueo{
+  font-size: smaller;
+}
+/* ------------------ DETALLES FACTURA ------------------ */
+.detail-factura-container { display: flex; flex-direction: column; }
+.table-scroll-container { overflow-y: auto; max-height: 250px; }
+.product-list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #1f252b;
+}
+.list-group-item { background-color: #1f252b; color: #f8f9fa; border-color: #30363d; }
+.list-group-item:hover { background-color: #000000!important; }
+
+.list-group-item small { font-size: 11px; }
+
+/* ------------------ TABLAS Y FORMULARIOS ------------------ */
+.table-dark-styled {
+  --bs-table-color: #f8f9fa;
+  --bs-table-bg: #1f252b;
+  --bs-table-border-color: #30363d;
+  --bs-table-striped-bg: #161b22;
+  --bs-table-hover-bg: #272c33;
+  width: 100%;
+  margin-bottom: 0 !important;
+}
+.table-secondary { --bs-table-bg: #30363d; color: #f8f9fa; }
+.table th, .table td { font-size: 12px; padding: 6px !important; }
+.form-control, .form-select {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #1f252b;
+  border-color: #30363d;
+  color: #f8f9fa;
+}
+input[type="number"] { height: 28px; font-size: 12px; }
+.form-control:focus, .form-select:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 0.25rem rgba(88, 166, 255, 0.25);
+}
+
+/* ------------------ BOTONES ------------------ */
+.btn, .btn-sm, .btn-light, .btn-outline-primary {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+}
+.btn-light { background-color: #f8f9fa !important; color: #000 !important; }
+.btn-outline-secondary, .btn-outline-warning, .btn-outline-primary {
+  color: #c9d1d9; border-color: #484f58;
+}
+.btn-outline-secondary:hover, .btn-outline-warning:hover, .btn-outline-primary:hover {
+  color: #212529; background-color: #c9d1d9;
+}
+
+* { color: #c9d1d9 !important; }
+/* ====== Acordeón oscuro y compacto (match con inputs) ====== */
+.accordion.accordion-dark {
+  /* Colores iguales a tus inputs */
+  --bs-accordion-bg: #1f252b;
+  --bs-accordion-color: #f8f9fa;
+  --bs-accordion-border-color: #30363d;
+
+  /* Botón/header */
+  --bs-accordion-btn-bg: #1f252b;
+  --bs-accordion-btn-color: #f8f9fa;
+  --bs-accordion-active-bg: #161b22;
+  --bs-accordion-active-color: #f8f9fa;
+
+  /* Bordes y radios */
+  --bs-accordion-border-radius: .5rem;
+  --bs-accordion-inner-border-radius: .5rem;
+
+  /* Focus ring como tus inputs */
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(88,166,255,.25);
+}
+
+/* Compactación (alto menor, más estilizado) */
+.accordion.accordion-dark .accordion-button {
+  padding: .5rem .75rem;       /* antes ~.9rem */
+  font-size: .95rem;
+  background-color: var(--bs-accordion-btn-bg);
+  color: var(--bs-accordion-btn-color);
+  border-radius: var(--bs-accordion-border-radius);
+}
+
+/* Estado expandido */
+.accordion.accordion-dark .accordion-button:not(.collapsed) {
+  background-color: var(--bs-accordion-active-bg);
+  color: var(--bs-accordion-active-color);
+  box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width,1px)) 0 var(--bs-accordion-border-color);
+}
+
+/* Cuerpo del acordeón */
+.accordion.accordion-dark .accordion-body {
+  background-color: var(--bs-accordion-bg);
+  color: var(--bs-accordion-color);
+  padding: .75rem .9rem;       /* más compacto */
+}
+
+/* Ícono (chevron) claro */
+.accordion.accordion-dark .accordion-button::after {
+  filter: invert(1) brightness(1.2);
+}
+
+/* Bordes/contorno coherentes */
+.accordion.accordion-dark .accordion-item {
+  background-color: transparent;         /* evita blanco heredado */
+  border: 1px solid var(--bs-accordion-border-color);
+  border-radius: var(--bs-accordion-border-radius);
+}
+.accordion.accordion-dark .accordion-item + .accordion-item {
+  margin-top: .5rem;                     /* separación entre items */
+  border-top: 1px solid var(--bs-accordion-border-color);
+}
+/* ------------------ GARANTÍA ANTI-SCROLL HORIZONTAL ------------------ */
+.container, .container-fluid, .row, .col, [class*="col-"] {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.form-control,
+.form-select {
+  background-color: #1f252b;
+  color: #f8f9fa;
+  border-color: #30363d;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #1f252b;         /* <- evita que Bootstrap lo ponga blanco */
+  color: #f8f9fa;                     /* texto claro sobre fondo oscuro */
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 0.25rem rgba(88,166,255,.25);
+}
+
+/* Placeholder legible en tema oscuro */
+.form-control::placeholder {
+  color: #9aa4b2;
+  opacity: 1;
+}
+
+/* Cursor y selección */
+.form-control, .form-select { caret-color: #f8f9fa; }
+::selection { background: rgba(88,166,255,.35); color: #fff; }
+
+/* Chrome/Safari autofill (evita amarillo) */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #1f252b inset !important;
+  -webkit-text-fill-color: #f8f9fa !important;
+  caret-color: #f8f9fa;
+}
+
+/* Deshabilitados coherentes */
+.form-control:disabled, .form-select:disabled {
+  background-color: #141920;
+  color: #a6b0bb;
+}
+.no-scrollbar {
+  overflow: auto;                 /* o overflow-y: auto; según necesites */
+  -ms-overflow-style: none;       /* IE y Edge antiguos */
+  scrollbar-width: none;          /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar { /* Chrome, Edge (Chromium), Safari */
+  width: 0;
+  height: 0;
+}
+.dashboard-content {
+  flex: 1;                  /* ocupa el alto restante del dashboard */
+  min-height: 0;            /* CLAVE para permitir overflow en flex hijo */
+  overflow-y: auto;         /* scroll solo vertical aquí */
+  overflow-x: hidden;
+  padding-right: 12px;
+  margin-top: 10px;
+  display: block;           /* o deja 'flex' si lo necesitas, ambas valen */
+  -ms-overflow-style: none; /* IE/Edge antiguos: oculta barra */
+  scrollbar-width: none;    /* Firefox: oculta barra */
+  -webkit-overflow-scrolling: touch; /* inercia en iOS */
+}
+.var-highlight {
+  color: #C0AD60;
+}
+
+.string-highlight {
+  color: rgba(253, 149, 90, 0.8);
+}
+
+#typewriter {
+  font-size: 1em;
+  margin: 0;
+  font-family: "Courier New";
+}
+#typewriter:after {
+  content: "|";
+  -webkit-animation: blink 500ms linear infinite alternate;
+          animation: blink 500ms linear infinite alternate;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
