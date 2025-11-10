@@ -121,7 +121,9 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
                     TipoFactura = factura.TipoFactura,
                     Fecha = factura.FechaFactura.ToDateTime(new TimeOnly(0, 0)),
                     ClienteNombre = factura.IdClienteNavigation?.NomCliente ?? "N/D",
+                    ClienteApellido = factura.IdClienteNavigation?.ApeCliente ?? "N/D",
                     EmpleadoNombre = factura.IdEmpleadoNavigation?.NomEmp ?? "N/D",
+                    EmpleadoApellido = factura.IdEmpleadoNavigation?.ApeEmp ?? "N/D",
                     Detalles = factura.DetalleFacturas.Select(d => new FacturaPdfDetalleDto
                     {
                         ProductoNombre = d.IdProductoNavigation?.NombreComercial ?? $"Prod {d.IdProducto}",

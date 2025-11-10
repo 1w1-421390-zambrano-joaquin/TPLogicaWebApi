@@ -44,11 +44,11 @@
                             {
                                 c.Item().Text("Cliente:")
                                     .Bold();
-                                c.Item().Text(f.ClienteNombre);
+                                c.Item().Text(f.ClienteNombre +" "+ f.ClienteApellido);
 
                                 c.Item().Text("Atendido por:")
                                     .Bold();
-                                c.Item().Text(f.EmpleadoNombre);
+                                c.Item().Text(f.EmpleadoNombre +" " +f.EmpleadoApellido);
                             });
                         });
 
