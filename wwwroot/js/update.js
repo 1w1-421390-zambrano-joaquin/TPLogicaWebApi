@@ -174,39 +174,58 @@ async function enviarUpdateProducto(action) {
   const unidadMedida = unidadMedidaInput?.value.trim();
   const proveedor = proveedorInput?.value.trim();
   const contenidoCantidad =
-    contenidoCantidadInput?.value ? Number(contenidoCantidadInput.value) : null;
+      contenidoCantidadInput?.value ? Number(contenidoCantidadInput.value) : null;
   const numeroLote = loteInput?.value ? Number(loteInput.value) : null;
   const fechaVencimiento = fechaVencimientoInput?.value || null;
-  const stockForm = stockInput?.value ? Number(stockInput.value) : 0;
+  const stockValue = stockInput?.value.trim();
+  const stockForm = stockValue !== '' ? Number(stockValue) : NaN;
   const precio = precioUnitarioInput?.value ? Number(precioUnitarioInput.value) : 0;
 
-  if (!nombreComercial || !proveedor) {
-    await showErrorAlert('Nombre comercial y proveedor son obligatorios.');
-    return;
-  }
-  if (numeroLote == null || numeroLote <= 0) {
-    await showErrorAlert('El número de lote debe ser mayor a 0.');
-    return;
-  }
-  if (contenidoCantidad == null || contenidoCantidad <= 0) {
-    await showErrorAlert('La cantidad de contenido debe ser mayor a 0.');
-    return;
-  }
-  if (precio < 0) {
-    await showErrorAlert('El precio no puede ser negativo.');
-    return;
-  }
-  if (stockForm < 0) {
-    await showErrorAlert('El stock no puede ser negativo.');
-    return;
-  }
+
+    if (!nombreComercial || !proveedor) {
+        await showErrorAlert('Nombre comercial y proveedor son obligatorios.');
+        return;
+    }
+
+    if (!unidadMedida) {
+        await showErrorAlert('La unidad de medida es obligatoria.');
+        return;
+    }
+
+    
+    if (/^\d+([.,]\d+)?$/.test(unidadMedida)) {
+        await showErrorAlert('La unidad de medida no puede ser solo números.');
+        return;
+    }
+
+    if (numeroLote == null || Number.isNaN(numeroLote) || numeroLote <= 0) {
+        await showErrorAlert('El número de lote debe ser un número mayor a 0.');
+        return;
+    }
+
+    if (contenidoCantidad == null || Number.isNaN(contenidoCantidad) || contenidoCantidad <= 0) {
+        await showErrorAlert('La cantidad de contenido debe ser un número mayor a 0.');
+        return;
+    }
+
+    if (Number.isNaN(precio) || precio < 0) {
+        await showErrorAlert('El precio no puede ser negativo.');
+        return;
+    }
+
+    
+    if (Number.isNaN(stockForm) || stockForm <= 0) {
+        await showErrorAlert('El stock debe ser un número mayor a 0.');
+        return;
+    }
+
 
   let stockFinal = stockForm;
   let nombreFinal = nombreComercial;
 
   if (action === 'bajaProducto') {
     stockFinal = 0;
-    nombreFinal = `${nombreComercial} [Eliminado]`;
+    nombreFinal = `${nombreComercial} .`;
   }
 
   const productoDto = {

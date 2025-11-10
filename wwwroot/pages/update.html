@@ -115,7 +115,7 @@
                                         <!-- Stock: corto -->
                                         <div class="col-6 col-md-auto">
                                             <label for="stock" class="form-label text-light">Stock</label>
-                                            <input type="number" class="form-control bg-dark" id="stock" min="0"
+                                            <input type="number" class="form-control bg-dark" id="stock" min="1"
                                                 style="max-width: 90px;" required>
                                         </div>
 
@@ -123,7 +123,7 @@
                                         <div class="col-6 col-md-auto">
                                             <label for="precioUnitario" class="form-label text-light">Precio ($)</label>
                                             <input type="number" class="form-control bg-dark" id="precioUnitario"
-                                                step="0.01" min="0" style="max-width: 120px;" required>
+                                                step="0.01" min="1" style="max-width: 120px;" required>
                                         </div>
 
                                         <!-- Principio activo: un poco más ancho -->
@@ -181,19 +181,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <script>
-        const links = document.querySelectorAll(".nav-link, .dropdown-item");
-        links.forEach(link => {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-                links.forEach(l => l.classList.remove("active-link"));
-                this.classList.add("active-link");
-                const section = this.getAttribute("data-section");
-
-            });
-        });
-    </script> -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Factura</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../assets/cruzar.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
@@ -30,8 +31,8 @@
                 <img class="iconoNav" src="../assets/cruzar.png" width="30" height="30" alt="Cruz Farmacia">
                 <a class="navbar-brand fs-5 fw-bold text-light" href="#"></a>
                 <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,23 +42,28 @@
                         </li>
                         <li class="nav-item me-2">
                             <a class="nav-link text-black active-link" href="#" data-roles="admin,vendedor"
-                                data-section="Registro de nueva venta">Agregar venta</a>
+                               data-section="Registro de nueva venta">Agregar venta</a>
                         </li>
                         <li class="nav-item me-2">
                             <a class="nav-link text-black" href="./update.html" data-roles="admin"
-                            data-section="Modificar/borrar producto">Modificar/borrar producto</a>
+                               data-section="Modificar/borrar producto">Modificar/borrar producto</a>
                         </li>
                         <li class="nav-item me-2">
                             <a class="nav-link text-black" href="./insert.html" data-roles="admin" data-section="Agregar
-                                        producto">Agregar
-                                producto</a>
+                                        producto">
+                                Agregar
+                                producto
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <button class="btn"><a href="./login.html" data-roles="admin,vendedor" class="me-2 icon-link icon-link-hover">Salir<i
-                            class="icon-link icon-link-hover bi bi-box-arrow-right"></i></a></button>
-                    
+                    <button class="btn">
+                        <a href="./login.html" data-roles="admin,vendedor" class="me-2 icon-link icon-link-hover">
+                            Salir<i class="icon-link icon-link-hover bi bi-box-arrow-right"></i>
+                        </a>
+                    </button>
+
                 </div>
             </div>
         </nav>
@@ -67,15 +73,16 @@
                 <section class="col-lg-7 mb-4">
                     <div class="card shadow-sm card-dashboard d-flex flex-column" id="productos-section">
                         <div class="card-header bg-primary text-white card-header-dark">
-                            <h5 class="mb-0 text-light"><i class="fas fa-pills"></i> Búsqueda y detalle de productos
+                            <h5 class="mb-0 text-light">
+                                <i class="fas fa-pills"></i> Búsqueda y detalle de productos
                             </h5>
                         </div>
                         <div class="card-body d-flex flex-column">
                             <div class="non-stretch-block">
                                 <div class="input-group mb-3">
                                     <input id="txtBuscar" type="text" class="form-control"
-                                        placeholder="Buscar producto (nombre o princ. activo)"
-                                        aria-label="Buscador de Productos">
+                                           placeholder="Buscar producto (nombre o princ. activo)"
+                                           aria-label="Buscador de Productos">
                                     <button id="btnBuscar" value="" class="btn btn-light" type="button">
                                         <i class="fas fa-search"></i> Buscar
                                     </button>
@@ -107,7 +114,7 @@
                                     Total Factura: <span id="totalFactura"></span>
                                 </div>
                                 <button id="btnGenerarFactura" type="button"
-                                    class="btn btn-lg btn-success text-light w-25 mt-4">
+                                        class="btn btn-lg btn-success text-light w-25 mt-4">
                                     <i class="fas fa-file-invoice"></i> Generar Factura
                                 </button>
                             </div>
@@ -129,23 +136,24 @@
                                         <div class="input-group mb-3 d-flex flex-column">
                                             <div>
                                                 <input id="clienteSelectFilter" type="text"
-                                                    class="form-control form-control-sm mb-2"
-                                                    placeholder="Filtrar cliente">
+                                                       class="form-control form-control-sm mb-2"
+                                                       placeholder="Filtrar cliente">
                                             </div>
                                             <div>
-                                                <select id="clienteSelect" class="form-select">
-                                                    <option value="">— Seleccionar cliente—</option>
+                                                <select id="clienteSelect" class="form-select border-warning product-list-container" style="--bs-border-opacity: .4;">
+                                                    <option value="">- Lista de clientes -</option>
                                                 </select>
                                                 <small id="clienteSelectMsg" class="text-danger d-none"></small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-start col-12">
                                             <label for="nombreClienteInput"
-                                                class="col-auto col-form-label me-3">Cliente:
+                                                   class="col-auto col-form-label me-3">
+                                                Cliente:
                                             </label>
                                             <div class="col-md-8">
                                                 <input id="nombreClienteInput" disabled type="text"
-                                                    class="form-control w-100" placeholder="Nombre cliente">
+                                                       class="form-control w-100" placeholder="Nombre cliente">
 
                                             </div>
 
@@ -154,7 +162,7 @@
                                         <div class="col-md-2 col-md-6">
                                             <div class="d-flex align-items-center gap-2">
                                                 <small id="clienteMsg"
-                                                    class="ms-2 mb-2 text-danger fw-semibold"></small>
+                                                       class="ms-2 mb-2 text-danger fw-semibold"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -163,10 +171,10 @@
                                         <div class="col-auto">
                                             <div class="d-flex align-items-center justify-content-start">
                                                 <label for="clienteDni" class="col-auto mb-0 fw-semibold"
-                                                    style="min-width: 44px;">Dni:</label>
+                                                       style="min-width: 44px;">Dni:</label>
                                                 <input type="number" id="clienteDni"
-                                                    class="w-50 form-control d-flex align-self-end"
-                                                    placeholder="DNI / CUIT">
+                                                       class="w-50 form-control d-flex align-self-end"
+                                                       placeholder="DNI / CUIT">
                                             </div>
                                         </div>
                                         <button id="btnBuscarCliente" class="btn d-flex bg-dark ms-0">
@@ -183,25 +191,29 @@
                         <div class="col-12 mt-2">
                             <div class="card shadow-sm card-dashboard" id="factura-data-section">
                                 <div class="card-header bg-warning text-dark card-header-dark">
-                                    <h5 class="card-title text-light mb-0"><i class="fas fa-receipt me-2"></i>Datos de
+                                    <h5 class="card-title text-light mb-0">
+                                        <i class="fas fa-receipt me-2"></i>Datos de
                                         la
                                         Factura
                                     </h5>
 
                                 </div>
                                 <div class="card-body">
-                                    <p class="mb-1 text-light"># Nro. Factura:
+                                    <p class="mb-1 text-light">
+                                        # Nro. Factura:
                                         <span id="nroFacturaProximo" class="fw-bold ms-1 bg-dark">Cargando…</span>
                                     </p>
-                                    <p class="mb-1 text-light"># Tipo de Factura:
+                                    <p class="mb-1 text-light">
+                                        # Tipo de Factura:
                                         <select id="tipoFactura"
-                                            class="form-select form-select-sm d-inline-block w-auto">
+                                                class="form-select form-select-sm d-inline-block w-auto">
                                             <option value="A">A</option>
                                             <option value="B" selected>B</option>
                                             <option value="C">C</option>
                                         </select>
                                     </p>
-                                    <p class="mb-1 text-light"># Fecha: <span id="fechaActual" class="fw-bold"></span>
+                                    <p class="mb-1 text-light">
+                                        # Fecha: <span id="fechaActual" class="fw-bold"></span>
                                     </p>
                                 </div>
                             </div>
@@ -234,37 +246,37 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/auth.js"></script>
     <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const auth = requireAuth(['admin','vendedor']); // protege la página
-    if (!auth) return;
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = requireAuth(['admin', 'vendedor']); // protege la página
+            if (!auth) return;
 
-    const roles = auth.roles; // viene en minúsculas desde auth.js
+            const roles = auth.roles; // viene en minúsculas desde auth.js
 
-    // Mostrar/ocultar según data-roles
-    document.querySelectorAll('[data-roles]').forEach(el => {
-      const allowed = el.dataset.roles
-        .split(',')
-        .map(r => r.trim().toLowerCase())
-        .filter(Boolean);
+            // Mostrar/ocultar según data-roles
+            document.querySelectorAll('[data-roles]').forEach(el => {
+                const allowed = el.dataset.roles
+                    .split(',')
+                    .map(r => r.trim().toLowerCase())
+                    .filter(Boolean);
 
-      const canSee = roles.some(r => allowed.includes(r));
-      if (!canSee) {
-        el.classList.add('d-none'); // o el.remove();
-      }
-    });
+                const canSee = roles.some(r => allowed.includes(r));
+                if (!canSee) {
+                    el.classList.add('d-none'); // o el.remove();
+                }
+            });
 
-    // Logout
-    const btnLogout = document.getElementById('btnLogout');
-    if (btnLogout) {
-      btnLogout.addEventListener('click', (e) => {
-        e.preventDefault();
-        sessionStorage.clear();
-        window.location.href = '../index.html';
-      });
-    }
-  });
-</script>
-<script src="../js/ventas.js"></script>
+            // Logout
+            const btnLogout = document.getElementById('btnLogout');
+            if (btnLogout) {
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    sessionStorage.clear();
+                    window.location.href = '../index.html';
+                });
+            }
+        });
+    </script>
+    <script src="../js/ventas.js"></script>
     <!-- <script src="../js/main.js"></script> -->
 </body>
 

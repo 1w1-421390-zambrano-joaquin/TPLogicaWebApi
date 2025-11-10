@@ -62,35 +62,39 @@ function getProductoInsertDto() {
 }
 
 function validarProducto(productDto) {
-  if (!productDto.nombreComercial) {
-    return 'El nombre comercial es obligatorio.';
-  }
-  if (!productDto.principioActivo) {
-    return 'El principio activo es obligatorio.';
-  }
-  if (!Number.isFinite(productDto.contenidoCantidad) || productDto.contenidoCantidad <= 0) {
-    return 'El contenido debe ser mayor a 0.';
-  }
-  if (!productDto.unidadMedida) {
-    return 'La unidad de medida es obligatoria.';
-  }
-  if (!Number.isInteger(productDto.nroLote) || productDto.nroLote <= 0) {
-    return 'El número de lote debe ser mayor a 0.';
-  }
-  if (!productDto.fVencimiento) {
-    return 'La fecha de vencimiento es obligatoria.';
-  }
-  if (!Number.isInteger(productDto.stock) || productDto.stock < 0) {
-    return 'El stock no puede ser negativo.';
-  }
-  if (!productDto.proveedor) {
-    return 'El proveedor es obligatorio.';
-  }
-  if (!Number.isFinite(productDto.precio) || productDto.precio <= 0) {
-    return 'El precio debe ser mayor a 0.';
-  }
-  return null;
+    if (!productDto.nombreComercial) {
+        return 'El nombre comercial es obligatorio.';
+    }
+    if (!productDto.principioActivo) {
+        return 'El principio activo es obligatorio.';
+    }
+    if (!Number.isFinite(productDto.contenidoCantidad) || productDto.contenidoCantidad <= 0) {
+        return 'El contenido debe ser mayor a 0.';
+    }
+    if (!productDto.unidadMedida) {
+        return 'La unidad de medida es obligatoria.';
+    }
+    if (/^\d+([.,]\d+)?$/.test(productDto.unidadMedida)) {
+        return 'La unidad de medida no puede ser solo números.';
+    }
+    if (!Number.isInteger(productDto.nroLote) || productDto.nroLote <= 0) {
+        return 'El número de lote debe ser mayor a 0.';
+    }
+    if (!productDto.fVencimiento) {
+        return 'La fecha de vencimiento es obligatoria.';
+    }
+    if (!Number.isInteger(productDto.stock) || productDto.stock <= 0) {
+        return 'El stock debe ser un número mayor a 0.';
+    }
+    if (!productDto.proveedor) {
+        return 'El proveedor es obligatorio.';
+    }
+    if (!Number.isFinite(productDto.precio) || productDto.precio <= 0) {
+        return 'El precio debe ser mayor a 0.';
+    }
+    return null;
 }
+
 
 async function createProduct(event) {
   event.preventDefault();

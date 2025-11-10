@@ -12,7 +12,9 @@ html, body {
   background-color: #080710;
   font-family: 'Poppins', sans-serif;
 }
-
+a {
+    text-decoration: none!important;
+}
 /* ------------------ FONDO CON BURBUJAS ------------------ */
 .background {
   width: 430px;

@@ -17,6 +17,9 @@ body{
     left: 50%;
     top: 50%;
 }
+a {
+    text-decoration: none !important
+}
 .background .shape{
     height: 200px;
     width: 200px;
