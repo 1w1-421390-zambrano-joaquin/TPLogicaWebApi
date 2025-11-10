@@ -9,7 +9,7 @@ $loginForm.addEventListener('submit', async event => {
 
 async function loginUser(username, password) {
   try {
-    const response = await fetch('https://localhost:7143/api/Auth/login', {
+    const response = await fetch('/api/Auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

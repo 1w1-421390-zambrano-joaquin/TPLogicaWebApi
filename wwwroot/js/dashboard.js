@@ -1,4 +1,4 @@
-const $API_BASE = 'https://localhost:7143/api';
+const $API_BASE = '/api';
 
 (function setupFacturasAccordion() {
   const $facturasApiUrl = `${$API_BASE}/Facturas/all`;

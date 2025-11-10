@@ -1,4 +1,4 @@
-const API_BASE = 'https://localhost:7143/api';
+const API_BASE = '/api';
 let productoSeleccionadoId = null;
 
 function showSuccessAlert(message) {

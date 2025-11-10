@@ -1,4 +1,4 @@
-const $API_BASE = 'https://localhost:7143/api';
+const $API_BASE = '/api';
 
 const $selectElement = selector => document.querySelector(selector);
 const $ventaCarrito = new Map();

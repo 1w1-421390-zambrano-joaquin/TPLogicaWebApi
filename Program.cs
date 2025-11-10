@@ -68,6 +68,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Esto busca el index.html en la raíz
+app.UseDefaultFiles();
+
+// Esto sirve los archivos que están en wwwroot (css, js, etc.)
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
