@@ -10,7 +10,7 @@ namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class EmpleadosController : ControllerBase
     {
         private IEmpleadoService _service;
@@ -20,6 +20,7 @@ namespace TPLogicaWebApi.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -32,6 +33,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("Estado")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetEstado()
         {
             try
@@ -45,6 +47,7 @@ namespace TPLogicaWebApi.Controllers
         }
         
         [HttpGet("DNI/{dni:int}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetByDni(int dni)
         {
             try
@@ -59,6 +62,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("Nombre/{nombre}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try
@@ -73,6 +77,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("id/{id}")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetEmpleadoById(int id)
         {
             try
@@ -88,6 +93,7 @@ namespace TPLogicaWebApi.Controllers
         }
         // POST api/<EmpleadosController>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PostEmpleado([FromBody] EmpleadoInsertDto empleado)
         {
             try
@@ -102,6 +108,7 @@ namespace TPLogicaWebApi.Controllers
 
         // PUT api/<EmpleadosController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutEmpleadp(int id, [FromBody] EmpleadoUpdateDto empleado)
         {
             try

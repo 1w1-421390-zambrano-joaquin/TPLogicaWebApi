@@ -29,6 +29,6 @@ namespace TPLogicaWebApi.DATA.DTOs.ProductoDTOs
         public string? Proveedor { get; set; }
 
         [Range(0, 999999999999, ErrorMessage = "El precio no puede ser negativo.")]
-        public int Precio { get; set; }
+        public decimal Precio { get; set; }
     }
 }

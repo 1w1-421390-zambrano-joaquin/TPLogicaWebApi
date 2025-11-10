@@ -80,17 +80,17 @@ namespace TPLogicaWebApi.Controllers
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            
+            var now = DateTime.UtcNow;
             var claims = new List<Claim>
             {
-                
+
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.IdEmpleado.ToString()),
-                
-                new Claim(JwtRegisteredClaimNames.Email, usuario.IdCredencialNavigation.Email), 
-                
+                new Claim(JwtRegisteredClaimNames.Email, usuario.IdCredencialNavigation.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                
-                new Claim(JwtRegisteredClaimNames.Iat,DateTime.Now.ToString())
+       
+                new Claim(JwtRegisteredClaimNames.Iat,
+                new DateTimeOffset(now).ToUnixTimeSeconds().ToString(),
+                  ClaimValueTypes.Integer64)
             };
 
             
@@ -99,16 +99,17 @@ namespace TPLogicaWebApi.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, auth.IdRolNavigation.Rol));
             }
 
-            
+
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(8), 
+                notBefore: now,
+                expires: now.AddHours(8),
                 signingCredentials: creds
-            );
+                 );
 
-            
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
