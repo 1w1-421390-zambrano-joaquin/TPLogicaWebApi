@@ -1,0 +1,1 @@
+En la carpeta del proyecto se encuentra el script de la base de datos necesaria, un txt con las credenciales para iniciar sesion con los diferentes tipos de usuarios. Y un der donde podra ver la estructura de la base

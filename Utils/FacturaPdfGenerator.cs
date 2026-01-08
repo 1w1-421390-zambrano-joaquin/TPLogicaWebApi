@@ -109,7 +109,7 @@
                                     .Text(sub.ToString("C"));
                             }
 
-                            // Fila total
+                           
                             table.Cell().ColumnSpan(3)
                                 .Element(c => c.PaddingTop(5))
                                 .AlignRight()
@@ -125,7 +125,7 @@
                                 .FontSize(11);
                         });
 
-                        // Notas o footer interno opcional
+                        
                         col.Item().PaddingTop(15).Text("Gracias por su compra.")
                             .Italic()
                             .FontSize(9)
@@ -134,7 +134,7 @@
 
                     page.Footer()
     .AlignCenter()
-    // ACA FLACO!! -> el estilo del texto del footer se configura acá
+    
     .DefaultTextStyle(x => x.FontSize(8))
     .Text(txt =>
     {
