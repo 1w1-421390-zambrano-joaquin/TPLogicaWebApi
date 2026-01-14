@@ -1,0 +1,22 @@
+email                                       password
+-----------------------------------------------------------
+rocio.cordoba@farmacia.com                  Vendedor#14
+pedro.acosta@farmacia.com                   Vendedor#5
+noelia.farias@farmacia.com                  Vendedor#18
+tomas.silva@farmacia.com                    Vendedor#11
+ezequiel.mansilla@farmacia.com              Vendedor#13
+julieta.medina@farmacia.com                 Vendedor#6
+santiago.benitez@farmacia.com               Vendedor#17
+martin.luna@farmacia.com                    Vendedor#1
+german.paz@farmacia.com                     Vendedor#9
+sebastian.ibarra@farmacia.com               Vendedor#3
+leandro.moreno@farmacia.com                 Vendedor#15
+luciana.ferrer@farmacia.com                 Vendedor#4
+ayelen.rios@farmacia.com                    Vendedor#10
+milagros.navarro@farmacia.com               Vendedor#16
+carla.paredes@farmacia.com                  Vendedor#2
+micaela.fuentes@farmacia.com                Vendedor#8
+daiana.vargas@farmacia.com                  Vendedor#12
+rodrigo.sosa@farmacia.com                   Vendedor#7
+laura.quiroga@farmacia.com                  Admin#2025
+franco@farmacia.com                         Admin#2025

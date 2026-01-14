@@ -35,7 +35,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
     {
         modelBuilder.Entity<Autenticacion>(entity =>
         {
-            entity.HasKey(e => e.IdAutenticado).HasName("PK__Autentic__358880BF07969B35");
+            entity.HasKey(e => e.IdAutenticado).HasName("PK__Autentic__358880BFBA3CA88F");
 
             entity.ToTable("Autenticacion");
 
@@ -56,7 +56,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.IdCliente).HasName("PK__Clientes__885457EED51E0676");
+            entity.HasKey(e => e.IdCliente).HasName("PK__Clientes__885457EE4B81245E");
 
             entity.Property(e => e.IdCliente).HasColumnName("idCliente");
             entity.Property(e => e.ApeCliente)
@@ -102,7 +102,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<DetalleFactura>(entity =>
         {
-            entity.HasKey(e => e.IdDetalleFacturas).HasName("PK__detalleF__0D8C413577F983F2");
+            entity.HasKey(e => e.IdDetalleFacturas).HasName("PK__detalleF__0D8C4135DAAEE85E");
 
             entity.ToTable("detalleFacturas");
 
@@ -126,7 +126,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Empleado>(entity =>
         {
-            entity.HasKey(e => e.IdEmpleado).HasName("PK__Empleado__5295297CB36A21D9");
+            entity.HasKey(e => e.IdEmpleado).HasName("PK__Empleado__5295297C736FC0BC");
 
             entity.Property(e => e.IdEmpleado).HasColumnName("idEmpleado");
             entity.Property(e => e.ApeEmp)
@@ -155,7 +155,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Factura>(entity =>
         {
-            entity.HasKey(e => e.NroFactura).HasName("PK__Facturas__7E5F42C66B267351");
+            entity.HasKey(e => e.NroFactura).HasName("PK__Facturas__7E5F42C6FB67D997");
 
             entity.Property(e => e.NroFactura).HasColumnName("nroFactura");
             entity.Property(e => e.FechaFactura).HasColumnName("fechaFactura");
@@ -180,7 +180,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Producto>(entity =>
         {
-            entity.HasKey(e => e.IdProducto).HasName("PK__Producto__07F4A132D9AB559A");
+            entity.HasKey(e => e.IdProducto).HasName("PK__Producto__07F4A132056D3526");
 
             entity.Property(e => e.IdProducto).HasColumnName("idProducto");
             entity.Property(e => e.ContenidoCantidad)
@@ -193,6 +193,9 @@ public partial class FarmaciaTPLogica1Context : DbContext
                 .IsUnicode(false)
                 .HasColumnName("nombreComercial");
             entity.Property(e => e.NroLote).HasColumnName("nroLote");
+            entity.Property(e => e.PrecioUnitario)
+                .HasColumnType("decimal(14, 2)")
+                .HasColumnName("precioUnitario");
             entity.Property(e => e.PrincipioActivo)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -212,7 +215,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__Roles__3C872F7613DC6A25");
+            entity.HasKey(e => e.IdRol).HasName("PK__Roles__3C872F76FFB7E569");
 
             entity.Property(e => e.IdRol).HasColumnName("idRol");
             entity.Property(e => e.Rol)
@@ -223,7 +226,7 @@ public partial class FarmaciaTPLogica1Context : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuarios__645723A603BB358C");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuarios__645723A697C071D6");
 
             entity.Property(e => e.IdUsuario)
                 .ValueGeneratedNever()

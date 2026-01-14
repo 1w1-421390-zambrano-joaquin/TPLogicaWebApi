@@ -4,5 +4,6 @@
     {
         public int IdProducto { get; set; }
         public string? NombreComercial { get; set; }
+        public decimal Precio { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace TPLogicaWebApi.DATA.Repositories.Interfaces
 
         Task<Usuario?> GetByEmailRoles(string email);
 
-        // Un validador rápido para el REGISTRO
+        
         Task<bool> EmailExists(string email);
     }
 }

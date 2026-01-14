@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using TPLogicaWebApi.DATA.DTOs.ProductoDTOs;
 using TPLogicaWebApi.DATA.Services.Interfaces;
-
 
 
 namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductosController : ControllerBase
     {
         private IProductoService _service;
@@ -17,6 +20,7 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -30,6 +34,7 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -47,6 +52,7 @@ namespace TPLogicaWebApi.Controllers
         }
 
         [HttpGet("buscar")]
+        [Authorize(Roles = "admin,vendedor")]
         public async Task<IActionResult> GetNombre([FromQuery] string nombre)
         {
             try
@@ -65,21 +71,30 @@ namespace TPLogicaWebApi.Controllers
 
         // POST api/<ProductosController>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([FromBody] ProductoInsertDto producto)
         {
             try
             {
-                
-                
-                return Ok(await _service.Cargar(producto));
+                var result = await _service.Cargar(producto);
+                return Ok(result);
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex) when (
+                ex.InnerException is SqlException sql &&
+                (sql.Number == 2627 || sql.Number == 2601) // UNIQUE KEY
+            )
             {
-                return StatusCode(500, ex.Message);
+                return Conflict(new { message = "Ya existe un producto con ese nombre comercial." });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Error interno del servidor.");
             }
         }
 
+
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update(int id, [FromBody] ProductoUpdateDto producto)
         {
             try

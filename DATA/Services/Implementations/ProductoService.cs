@@ -19,11 +19,12 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 NombreComercial = producto.NombreComercial,
                 PrincipioActivo = producto.PrincipioActivo,
                 ContenidoCantidad = producto.ContenidoCantidad,
-                UnidadMedida = producto.UnidadMedida,
+                UnidadMedida = producto.UnidadMedida.ToLower(),
                 NroLote = producto.NroLote,
                 FVencimiento = producto.FVencimiento,
                 Stock = producto.Stock,
-                Proveedor = producto.Proveedor
+                Proveedor = producto.Proveedor,
+                PrecioUnitario = producto.Precio
             };
             DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
             if (entity.FVencimiento < hoy)
@@ -42,11 +43,12 @@ namespace TPLogicaWebApi.DATA.Services.Implementations
                 NombreComercial = producto.NombreComercial,
                 PrincipioActivo = producto.PrincipioActivo,
                 ContenidoCantidad = producto.ContenidoCantidad,
-                UnidadMedida = producto.UnidadMedida,
+                UnidadMedida = producto.UnidadMedida.ToLower(),
                 NroLote = producto.NroLote,
                 FVencimiento = producto.FVencimiento,
                 Stock = producto.Stock,
-                Proveedor = producto.Proveedor
+                Proveedor = producto.Proveedor,
+                PrecioUnitario= producto.Precio
             };
             DateOnly hoy = DateOnly.FromDateTime(DateTime.Now);
             if (entity.FVencimiento < hoy)

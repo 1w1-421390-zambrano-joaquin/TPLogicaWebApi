@@ -24,4 +24,6 @@ public partial class Producto
     public int Stock { get; set; }
 
     public string Proveedor { get; set; }
+
+    public decimal PrecioUnitario { get; set; }
 }

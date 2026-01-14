@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TPLogicaWebApi.DATA.DTOs.EmpleadosDTOs;
 using TPLogicaWebApi.DATA.Services.Interfaces;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -9,6 +10,7 @@ namespace TPLogicaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmpleadosController : ControllerBase
     {
         private IEmpleadoService _service;
@@ -18,6 +20,7 @@ namespace TPLogicaWebApi.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -30,6 +33,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("Estado")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetEstado()
         {
             try
@@ -43,6 +47,7 @@ namespace TPLogicaWebApi.Controllers
         }
         
         [HttpGet("DNI/{dni:int}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetByDni(int dni)
         {
             try
@@ -57,6 +62,7 @@ namespace TPLogicaWebApi.Controllers
             }
         }
         [HttpGet("Nombre/{nombre}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetNombre(string nombre)
         {
             try
@@ -70,8 +76,24 @@ namespace TPLogicaWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("id/{id}")]
+        [Authorize(Roles = "admin,vendedor")]
+        public async Task<IActionResult> GetEmpleadoById(int id)
+        {
+            try
+            {
+                if (id < 0)
+                    return BadRequest("El id es requisito.");
+                return Ok(await _service.TraerId(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         // POST api/<EmpleadosController>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PostEmpleado([FromBody] EmpleadoInsertDto empleado)
         {
             try
@@ -86,6 +108,7 @@ namespace TPLogicaWebApi.Controllers
 
         // PUT api/<EmpleadosController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutEmpleadp(int id, [FromBody] EmpleadoUpdateDto empleado)
         {
             try

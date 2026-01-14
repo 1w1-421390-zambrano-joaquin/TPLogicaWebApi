@@ -43,12 +43,18 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
                             Producto = new ProductoGetDto
                             {
                                 IdProducto = d.IdProductoNavigation.IdProducto,
-                                NombreComercial = d.IdProductoNavigation.NombreComercial
+                                NombreComercial = d.IdProductoNavigation.NombreComercial,
+                                Precio= d.IdProductoNavigation.PrecioUnitario
+
                             }
                         })
                         .ToList()
                 })
                 .ToListAsync();
+        }
+        public async Task<Factura> GetUltimaFactura()
+        {
+            return await _context.Facturas.OrderByDescending(x => x.NroFactura).FirstOrDefaultAsync();
         }
         public async Task<FacturaGetDto?> GetFactura(int nroFactura)
         {
@@ -94,6 +100,38 @@ namespace TPLogicaWebApi.DATA.Repositories.Implementations
         {
             
            await _context.Facturas.AddAsync(factura);
+        }
+
+        public async Task<FacturaPdfDto?> GetFacturaPdf(int idFactura)
+        {
+            {
+                var factura = await _context.Facturas
+                    .Include(f => f.IdClienteNavigation)
+                    .Include(f => f.IdEmpleadoNavigation)
+                    .Include(f => f.DetalleFacturas)
+                        .ThenInclude(d => d.IdProductoNavigation)
+                    .FirstOrDefaultAsync(f => f.NroFactura == idFactura);
+
+                if (factura == null)
+                    return null;
+
+                return new FacturaPdfDto
+                {
+                    IdFactura = factura.NroFactura,
+                    TipoFactura = factura.TipoFactura,
+                    Fecha = factura.FechaFactura.ToDateTime(new TimeOnly(0, 0)),
+                    ClienteNombre = factura.IdClienteNavigation?.NomCliente ?? "N/D",
+                    ClienteApellido = factura.IdClienteNavigation?.ApeCliente ?? "N/D",
+                    EmpleadoNombre = factura.IdEmpleadoNavigation?.NomEmp ?? "N/D",
+                    EmpleadoApellido = factura.IdEmpleadoNavigation?.ApeEmp ?? "N/D",
+                    Detalles = factura.DetalleFacturas.Select(d => new FacturaPdfDetalleDto
+                    {
+                        ProductoNombre = d.IdProductoNavigation?.NombreComercial ?? $"Prod {d.IdProducto}",
+                        Cantidad = d.Cantidad,
+                        PrecioUnitario = d.PrecioUnitario
+                    }).ToList()
+                };
+            }
         }
     }
 }

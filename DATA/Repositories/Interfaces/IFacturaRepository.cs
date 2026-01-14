@@ -8,5 +8,7 @@ namespace TPLogicaWebApi.DATA.Repositories.Interfaces
         Task<FacturaGetDto?> GetFactura(int nroFactura);
         Task Insert(Factura factura);
         Task<List<FacturaGetDto?>> GetAllFacturas();
+        Task<Factura> GetUltimaFactura();
+        Task<FacturaPdfDto?> GetFacturaPdf(int idFactura);
     }
 }
